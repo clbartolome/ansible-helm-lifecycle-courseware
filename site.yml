@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: Ansible Helm Lifecycle Tutorial
-  url: https://redhat-scholars.github.io/course-template
+  url: https://clbartolome.github.io/ansible-helm-lifecycle
   start_page: ansible-helm-lifecycle::index.adoc
 
 content:

@@ -1,6 +1,6 @@
 # Ansible Helm Lifecycle Lab
 
-Created from Red Hat Scholars [template](https://github.com/redhat-scholars/courseware-template).
+Created from Red Hat Scholars [template](https://github.com/clbartolome/courseware-template).
 
 ## Run locally
 
