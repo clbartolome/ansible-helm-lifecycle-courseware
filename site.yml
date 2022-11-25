@@ -3,12 +3,16 @@ runtime:
 
 site:
   title: Ansible Helm Lifecycle Tutorial
-  url: https://clbartolome.github.io/ansible-helm-lifecycle
+  url: https://clbartolome.github.io/ansible-helm-lifecycle-courseware
   start_page: ansible-helm-lifecycle::index.adoc
 
 content:
   sources:
-    - url: ./
+    # - url: ./
+    #   start_path: documentation
+    - url: git@github.com:clbartolome/ansible-helm-lifecycle-courseware.git
+      tags: []
+      branches: [master]
       start_path: documentation
 
 asciidoc:
