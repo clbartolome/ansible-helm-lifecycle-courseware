@@ -1,5 +1,5 @@
-name: template-tutorial
-title: Template Tutorial
+name: ansible-helm-lifecycle
+title: Ansible Helm Lifecycle Tutorial
 version: master
 nav:
   - modules/ROOT/nav.adoc
