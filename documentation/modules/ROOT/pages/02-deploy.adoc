@@ -41,3 +41,25 @@ And then you can deploy the service and execute commands inside:
 include::partial$exec_pod.adoc[]
 
 :!podname:
+
+== Exercise (example with solution)
+[tabs, subs="attributes+,+macros"]	
+====	
+Exercise::	
++	
+--	
+Exercise description:
+
+Blah blah blah...
+--	
+Solution::	
++	
+--	
+Solution description:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]	
+----	
+some command	
+----	
+====
