@@ -2,19 +2,20 @@
 :page-layout: home
 :!sectids:
 
-[.text-center.strong]
-== Publish Services to Kubernetes
-
-A Kubernetes guide to show how you can deploy a Java service to a Kubernetes cluster as it was a child game.
+TODO: Welcome message!!
 
 [.tiles.browse]
-== Browse modules
+== Lab Content
 
 [.tile]
-.xref:01-setup.adoc[Get Started]
-* xref:01-setup.adoc#minikube[Minikube]
+xref:01-overview.adoc[1. Overview]
 
-[.tile]
-.xref:02-deploy.adoc[Deploying]
-* xref:02-deploy.adoc#package[Package the Application]
-* xref:02-deploy.adoc#deploy[Deploy the Application]
+xref:02-first_execution.adoc[2. First Execution]
+
+xref:03-testing_environment.adoc[3. Testing Environment]
+
+xref:04-validations.adoc[4. Validations]
+
+xref:05-notification.adoc[5. Notifications]
+
+xref:06-challenges.adoc[6. Challenges]

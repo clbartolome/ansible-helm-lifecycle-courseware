@@ -1,0 +1,92 @@
+= First Execution
+include::_attributes.adoc[]
+
+
+[#webhook]
+== Configure Webhook
+
+TODO: content
+
+[#nexus]
+== Configure Nexus
+
+TODO: content
+
+[#chart]
+== Update Chart Repository
+
+TODO: content
+
+[#validate]
+== Validate Execution
+
+TODO: content
+
+[#app]
+== Update Application
+
+TODO: content
+
+
+// [#service]
+// == The Service
+// 
+// The code:
+// 
+// [.lines_7]
+// [.console-input]
+// [source, java,subs="+macros,+attributes"]
+// ----
+// public class Main {
+// 
+//     public static void main(String[] args) {
+// 
+//     } 
+// 
+// }
+// 
+// ./mvnw compile
+// ----
+// 
+// [#package]
+// == Packaging the Service
+// 
+// You can package the next bash script:
+// 
+// [source,bash,subs="+macros,+attributes"]
+// ----
+// include::example$run.sh[]
+// ----
+// 
+// [#deploy]
+// == Deploy the Service
+// 
+// And then you can deploy the service and execute commands inside:
+// 
+// :podname: apps
+// 
+// include::partial$exec_pod.adoc[]
+// 
+// :!podname:
+// 
+// == Exercise (example with solution)
+// [tabs, subs="attributes+,+macros"]	
+// ====	
+// Exercise::	
+// +	
+// --	
+// Exercise description:
+// 
+// Blah blah blah...
+// --	
+// Solution::	
+// +	
+// --	
+// Solution description:
+// 
+// [.console-input]
+// [source,bash,subs="attributes+,+macros"]	
+// ----	
+// some command	
+// ----	
+// ====
