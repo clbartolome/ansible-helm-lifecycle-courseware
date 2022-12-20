@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/01-setup.html</loc>
-<lastmod>2022-11-30T06:50:24.441Z</lastmod>
+<loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/01-overview.html</loc>
+<lastmod>2022-12-20T16:17:44.051Z</lastmod>
 </url>
 <url>
-<loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/02-deploy.html</loc>
-<lastmod>2022-11-30T06:50:24.441Z</lastmod>
+<loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/02-first_execution.html</loc>
+<lastmod>2022-12-20T16:17:44.051Z</lastmod>
+</url>
+<url>
+<loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/03-testing_environment.html</loc>
+<lastmod>2022-12-20T16:17:44.051Z</lastmod>
+</url>
+<url>
+<loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/04-validations.html</loc>
+<lastmod>2022-12-20T16:17:44.051Z</lastmod>
+</url>
+<url>
+<loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/05-notification.html</loc>
+<lastmod>2022-12-20T16:17:44.051Z</lastmod>
+</url>
+<url>
+<loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/06-challenges.html</loc>
+<lastmod>2022-12-20T16:17:44.051Z</lastmod>
 </url>
 <url>
 <loc>https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/index.html</loc>
-<lastmod>2022-11-30T06:50:24.441Z</lastmod>
+<lastmod>2022-12-20T16:17:44.051Z</lastmod>
 </url>
 </urlset>
