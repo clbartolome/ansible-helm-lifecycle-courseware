@@ -1,21 +1,17 @@
-= Welcome
+= Welcome to Ansible Helm Lifecycle Lab
 :page-layout: home
 :!sectids:
 
-TODO: Welcome message!!
+== Introduction
 
-[.tiles.browse]
-== Lab Content
+The aim of this laboratory is to take you through the complete lifecycle of a Helm Chart named 'base-chart' using Ansible Automation Platform. This Helm Chart will help operation teams on daily tasks like:
 
-[.tile]
-xref:01-overview.adoc[1. Overview]
+* Managing applications deployments
+* Control resources
+* Security and policies
+* Cluster housekeeping
+* Environments and cloud services
 
-xref:02-first_execution.adoc[2. First Execution]
+The lab is divided into two blocks of sections. The first one, from section 1 to 5 is a set of guided exercises that will allow you to familiarize yourself with the environment. The last one is a section called 'Challenges', a set of exercises with no guide that will allow you to face more real scenarios in your own way.
 
-xref:03-testing_environment.adoc[3. Testing Environment]
-
-xref:04-validations.adoc[4. Validations]
-
-xref:05-notification.adoc[5. Notifications]
-
-xref:06-challenges.adoc[6. Challenges]
+IMPORTANT: If you have any question or concern please let us know, we're more than happy to help!!

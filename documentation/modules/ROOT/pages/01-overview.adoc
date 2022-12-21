@@ -1,11 +1,18 @@
 = Overview
 include::_attributes.adoc[]
 
+IMPORTANT: Access links and credentials for all this components should be provided by the *laboratory team*.
+
 [#gitea]
 == Gitea
 
-TODO: content
+Gitea is a web-based collaborative software platform for hosting software development version control using Git as well as other collaborative features like bug tracking, code review, kanban boards, tickets, and wikis. 
 
+This laboratory includes three repositories:
+
+* *helm-ansible-pipeline*: contains the templates that form the 'base-chart' pipeline (workflow) in AAP.
+* *base-chart*: Helm Chart used in this laboratory.
+* *demo-app*: web application to demonstrate the deployment of an application using the chart. Shows the versions of the application and the Helm chart used for its deployment.
 
 [#aap]
 == Ansible Automation Platform
@@ -15,41 +22,88 @@ TODO: content
 [#ocp]
 == OpenShift
 
-TODO: content
+OpenShift is Red Hat's enterprise-ready Kubernetes platform. OpenShift is hosting all the applications used in this laboratory (AAP, Gitea, ArgoCD, Nexus, ...).
+
+As a laboratory student, you have an already created namespace named *'student<your number>-demo-app'* that contains an application used for testing the 'base-chart'. The application looks like this:
+
+image::1-overview-demoapp.png[]
+
+TIP: To review your 'demo-app' login into OpenShift, go to 'topology' and click the 'Open Url' button.
+
+image::1-overview-openurl.png[]
 
 [#nexus]
 == Nexus
 
-TODO: content
+Nexus is an open source repository that supports many artifacts formats like Java, Npm or Helm. In this laboratory we use Nexus to store the 'base-chart' Helm Chart packaged version.
+
+As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. Access nexus and go to 'Browse' to review your empty repository for helm packages.
+
+image::1-overview-nexus.png[]
+
+NOTE: Initially your 'demo-app' is using a Helm Chart deployed by laboratory admins, you will change that in next sections!
 
 [#argo]
 == Argo CD
 
-TODO: content
+Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. Follows the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. In this laboratory we use Helm Charts to specify the Kubernetes manifests.
 
-// include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/prerequisites-kubernetes.adoc[]
-// |===
+Login into Argo CD to take a look at your 'demo-app' application and see the status and the resources' tree:
 
-// include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/optional-requisites.adoc[]
-// |===
+image::1-overview-argoapp.png[]
 
-// 
-// [#minikube]
-// == Setup Kubernetes
-// 
-// :profile: my_profile
-// 
-// include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/kubernetes-setup.adoc[]
-// 
-// And then you are ready for start using Kubernetes:
-// 
-// image::kubelogo.png[]
-// 
-// [#downloadtutorial]
-// == Get tutorial sources
-// 
-// :tutorial-url: https://github.com/redhat-developer-demos/rhd-tutorial-common.git
-// :folder: my_folder
-// include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/download-sources.adoc[]
+Click on the 'APP DETAILS' button to validate that Argo is pointing to your Gitea repository *demo-app*, *master* branch and the directory *deploy*:
+
+image::1-overview-argodetails.png[]
+
+There are two key files in that repository:
+
+* *chart/values.yaml*: contains the values applied to deploy the application. 
+[,yaml]
+----
+base-chart:
+  global:
+    nameOverride: demo-app
+  runtime: nginx
+  size: S
+  image:
+    name: image-registry.openshift-image-registry.svc:5000/demo-app/demo-app
+    tag: 1.0.0
+  extraLabels:
+    app.kubernetes.io/part-of: demo-app
+    
+  deploy:
+    replicas: 1
+    strategy: RollingUpdate
+    ports:
+      - targetPort: 8080
+        protocol: TCP
+        name: http
+        port: 8080
+    route:
+      enabled: true
+      targetPort: http
+      tls:
+        enabled: false
+    configMap:
+      injectEnv: true
+      name: ui-config
+      path: /usr/share/nginx/html/assets/config
+----
+
+* Chart.yaml
+[,yaml]
+----
+apiVersion: v2
+name: demo-app
+description: Demo App
+type: application
+version: 1.0
+appVersion: "1.0.0"
+dependencies:
+- name: base-chart
+  repository: http://nexus.[cluster-api]/repository/helm/
+  version: 1.0.0
+----
 
 
