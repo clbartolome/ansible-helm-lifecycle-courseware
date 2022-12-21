@@ -58,7 +58,22 @@ image::1-overview-argodetails.png[]
 
 There are two key files in that repository:
 
-* *chart/values.yaml*: contains the values applied to deploy the application. 
+* *deploy/Chart.yaml*: contains the reference to the Helm Chart that Argo CD will use to deploy the application:
+[,yaml]
+----
+apiVersion: v2
+name: demo-app
+description: Demo App
+type: application
+version: 1.0
+appVersion: "1.0.0"
+dependencies:
+- name: base-chart
+  repository: http://nexus.[cluster-api]/repository/helm/
+  version: 1.0.0
+----
+
+* *deploy/values.yaml*: contains the values applied to the Helm Chart to deploy the application. 
 [,yaml]
 ----
 base-chart:
@@ -91,19 +106,6 @@ base-chart:
       path: /usr/share/nginx/html/assets/config
 ----
 
-* Chart.yaml
-[,yaml]
-----
-apiVersion: v2
-name: demo-app
-description: Demo App
-type: application
-version: 1.0
-appVersion: "1.0.0"
-dependencies:
-- name: base-chart
-  repository: http://nexus.[cluster-api]/repository/helm/
-  version: 1.0.0
-----
+
 
 
