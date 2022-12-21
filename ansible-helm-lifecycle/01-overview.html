@@ -107,7 +107,7 @@
     <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#unninstall-chart">Unninstall Chart</a>
+    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
@@ -120,9 +120,6 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="04-validations.html#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#deployment">Deployment Image</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="04-validations.html#route">Route</a>
@@ -219,6 +216,18 @@ Access links and credentials for all this components should be provided by the <
 <p><strong>demo-app</strong>: web application to demonstrate the deployment of an application using the chart. Shows the versions of the application and the Helm chart used for its deployment.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+During the laboratory you will have to make changes to this repositories. Laboratory instructions asume you are using Gitea web, but you can clone this 3 repositories if you feel more comfortable doing and pushing changes in your laptop.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -325,7 +334,7 @@ Initially your 'demo-app' is using a Helm Chart deployed by laboratory admins, y
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>apiVersion: v2
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">apiVersion: v2
 name: demo-app
 description: Demo App
 type: application
@@ -333,8 +342,8 @@ version: 1.0
 appVersion: "1.0.0"
 dependencies:
 - name: base-chart
-  repository: http://nexus.[cluster-api]/repository/helm/
-  version: 1.0.0</pre>
+  repository: <a href="http://nexus" class="bare">http://nexus</a>.[cluster-api]/repository/helm/
+  version: 1.0.0</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -346,7 +355,7 @@ dependencies:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>base-chart:
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">base-chart:
   global:
     nameOverride: demo-app
   runtime: nginx
@@ -373,7 +382,7 @@ dependencies:
     configMap:
       injectEnv: true
       name: ui-config
-      path: /usr/share/nginx/html/assets/config</pre>
+      path: /usr/share/nginx/html/assets/config</code></pre>
 </div>
 </div>
 </div>

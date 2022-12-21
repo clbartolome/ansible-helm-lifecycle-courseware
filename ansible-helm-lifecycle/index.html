@@ -106,7 +106,7 @@
     <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#unninstall-chart">Unninstall Chart</a>
+    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
@@ -119,9 +119,6 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="04-validations.html#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#deployment">Deployment Image</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="04-validations.html#route">Route</a>
@@ -205,6 +202,49 @@
 <p>Environments and cloud services</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The laboratory focus in the lifecycle of the 'base-chart':</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/welcome.png" alt="welcome">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Operations team make a change in 'base-chart' repository (ex: new feature).</p>
+</li>
+<li>
+<p>Previous change triggers a workflow in Ansible Automation Platform.</p>
+</li>
+<li>
+<p>The workflow execute a set of job templates to:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Setup testing environment in OpenShift.</p>
+</li>
+<li>
+<p>Deploy a testing application using the 'base-chart'.</p>
+</li>
+<li>
+<p>Validate a scenario.</p>
+</li>
+<li>
+<p>Clean up environment in OpenShift.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Package and upload the 'base-chart' new version to Nexus.</p>
+</li>
+<li>
+<p>Send a notification if everything works as expected.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>The lab is divided into two blocks of sections. The first one, from section 1 to 5 is a set of guided exercises that will allow you to familiarize yourself with the environment. The last one is a section called 'Challenges', a set of exercises with no guide that will allow you to face more real scenarios in your own way.</p>

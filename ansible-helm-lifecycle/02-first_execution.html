@@ -107,7 +107,7 @@
     <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#unninstall-chart">Unninstall Chart</a>
+    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
@@ -120,9 +120,6 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="04-validations.html#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#deployment">Deployment Image</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="04-validations.html#route">Route</a>
@@ -182,11 +179,103 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">First Execution</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+During this laboratory exercises you will see <strong>&lt;student&gt;</strong> in some files and URLs, remember to update it with your assigned <strong>student id</strong>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="webhook"><a class="anchor" href="#webhook"></a>Configure Webhook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: content</p>
+<p>We have created a Helm Chart named <strong>base-chart</strong> that will help Operation Teams with cluster management. In order to make upgrades or fix issues in our <strong>base-chart</strong> we are going to create a pipeline that manages the Helm Chart lifecycle.</p>
+</div>
+<div class="paragraph">
+<p>The first step is creating a webhook in our <strong>AAP Workflow</strong> (pipeline) and configure it in <strong>Gitea base-chart</strong> repository, so we can trigger it when new features or fixes are commited in our repository.</p>
+</div>
+<div class="sect2">
+<h3 id="_create_webhook"><a class="anchor" href="#_create_webhook"></a>Create Webhook</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login into <strong>Ansible Automation Platform</strong> and go to: <strong>Resources</strong> &gt; <strong>Templates</strong> &gt; <strong>[WF] Base Chart Pipeline</strong> and click <strong>edit</strong>.</p>
+</li>
+<li>
+<p>Enable the option <strong>Enable Webhook</strong>.</p>
+</li>
+<li>
+<p>Under <strong>Webhook details</strong> select <strong>GitHub</strong> as <strong>Webhook Service</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong> to generate the <strong>Webhook Key</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-webhook.png" alt="2 first webhook">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configure_webhook_in_gitea"><a class="anchor" href="#_configure_webhook_in_gitea"></a>Configure Webhook in Gitea</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login into <strong>Gitea</strong> and open <strong>base-chart</strong> repository.</p>
+</li>
+<li>
+<p>Go to <strong>Settings</strong> (top right corner) &gt; <strong>Webhook</strong> &gt; <strong>Add Webhook</strong> &gt; <strong>Gitea</strong>.</p>
+</li>
+<li>
+<p>Configure the following fields:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><strong>Target URL</strong>: Copy the <strong>Webhook URL</strong> from AAP.</p>
+</li>
+<li>
+<p><strong>Secret</strong>: Copy the <strong>Webhook Key</strong> from AAP.</p>
+</li>
+<li>
+<p>Keep the rest of settings by default.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Click <strong>Add Webhook</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-giteawh.png" alt="2 first giteawh">
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -194,7 +283,28 @@
 <h2 id="nexus"><a class="anchor" href="#nexus"></a>Configure Nexus</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: content</p>
+<p>Nexus is going to be the repository where we&#8217;re going to upload our packaged <strong>base-chart</strong>. In order to be able to upload it automatically as part of our pipeline, we need to modify the playbook where the chart is packaged and uploaded to point to your student repository in Nexus.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login into <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>05-helm-package-nexus.yml</strong>.</p>
+</li>
+<li>
+<p>Replace all <strong>&lt;student&gt;</strong> ocurrences with your student id.</p>
+</li>
+<li>
+<p>Click <strong>Commit Changes</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-nexus-playbook.png" alt="2 first nexus playbook">
+</div>
 </div>
 </div>
 </div>
@@ -202,13 +312,37 @@
 <h2 id="chart"><a class="anchor" href="#chart"></a>Update Chart Repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: content</p>
+<p>Now it is time to trigger our <strong>AAP Workflow</strong>. To do so we&#8217;re going to make a change in our <strong>base-chart</strong> repository, that change will automatically trigger the pipeline.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login into <strong>Gitea</strong> and open <strong>base-chart</strong> repository.</p>
+</li>
+<li>
+<p>Open the file <strong>chart/Chart.yaml</strong>.</p>
+</li>
+<li>
+<p>Modify <strong>version</strong> to <strong>1.0.0</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Commit Changes</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-basechart.png" alt="2 first basechart">
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="validate"><a class="anchor" href="#validate"></a>Validate Execution</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Pipeline should be now running in <strong>AAP</strong> and the new version of <strong>base-chart</strong> should be in your student repository in Nexus, let&#8217;s take a look at it.</p>
+</div>
 <div class="paragraph">
 <p>TODO: content</p>
 </div>

@@ -107,7 +107,7 @@
     <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#unninstall-chart">Unninstall Chart</a>
+    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
@@ -120,9 +120,6 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="04-validations.html#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#deployment">Deployment Image</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="04-validations.html#route">Route</a>
@@ -195,6 +192,32 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>TODO: Content</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>name: "Populate New Base Chart version {{ version }}"
+ansible.builtin.set_stats:
+  data:
+    new_version: "{{ version }}"</p>
+</li>
+<li>
+<p>name: Send New Base Chart version Slack notification
+community.general.slack:
+  token: "{{ lookup('env','SLACK_TOKEN') }}"
+  msg: |
+      <mark># Base Chart Pipeline </mark>#
+      --------------------------------------
+      <code>Status</code>: Success.
+      <code>New Base Chart Version</code>: {{ new_version }}
+      --------------------------------------
+  channel: "{{ lookup('env','SLACK_CHANNEL') }}"
+  color: good
+  username: "&lt;student&gt;"
+  link_names: 0
+  parse: 'none'</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

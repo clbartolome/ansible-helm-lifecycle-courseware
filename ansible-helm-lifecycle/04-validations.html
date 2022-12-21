@@ -107,7 +107,7 @@
     <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#unninstall-chart">Unninstall Chart</a>
+    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
@@ -120,9 +120,6 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#deployment">Deployment Image</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#route">Route</a>
@@ -191,14 +188,6 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="deployment"><a class="anchor" href="#deployment"></a>Deployment Image</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>TODO: Content</p>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="route"><a class="anchor" href="#route"></a>Route</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -211,6 +200,81 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>TODO: Content</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>      - name: Clone Base Chart remote repository
+          ansible.builtin.git:
+            repo: http://gitea.app-lifecycle-demo.svc:3000/gitea/base-chart.git
+            dest: /tmp/base-chart
+            version: master
+
+        - name: Read scenario values
+          ansible.builtin.include_vars:
+            file: "/tmp/base-chart/test/scenario1/values.yaml"
+            name: scenario
+
+        ########################################################################
+        # Deployment Tests
+        ########################################################################
+
+        - name: Test - Deployment --&gt; Get deployment
+          kubernetes.core.k8s_info:
+            api_version: apps/v1
+            kind: Deployment
+            namespace: "&lt;student&gt;-base-chart"
+            label_selectors:
+              - app={{ helm_test_scenario }}
+          ignore_errors: true
+          register: scenario_deployment
+
+        - name: Test - Deployment --&gt; Validate the number of replicas is correct
+          ansible.builtin.set_fact:
+            failed: true
+          when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas
+
+        - name: DEPLOY
+          debug:
+            var: scenario_deployment
+
+        - name: Test - Application Size - S or default
+          ansible.builtin.set_fact:
+            failed: true
+          when: (scenario.size is undefined or scenario.size == "S") and not
+                (scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.cpu == "100m" and
+                scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.memory == "256Mi" and
+                scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.cpu == "100m" and
+                scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.memory == "256Mi")
+
+        ########################################################################
+        # Route Tests
+        ########################################################################
+
+        - name: Test - Route --&gt; Get route
+          kubernetes.core.k8s_info:
+            api_version: route.openshift.io/v1
+            kind: Route
+            namespace: "&lt;student&gt;-base-chart"
+            label_selectors:
+              - app=scenario1
+          register: scenario_route
+          ignore_errors: true
+
+        - name: Test - Route --&gt; Send request to the route when route is defined and enabled
+          ansible.builtin.uri:
+            url: "http://{{ scenario_route.resources[0].spec.host }}"
+            method: GET
+            status_code: 200
+            return_content: yes
+          ignore_errors: true
+          register: route_response
+          when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0
+
+        - name: Test - Route --&gt; Validate route is working when is defined and enabled
+          ansible.builtin.set_fact:
+            failed: true
+          when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0 and route_response.status != 200</pre>
+</div>
 </div>
 </div>
 </div>
