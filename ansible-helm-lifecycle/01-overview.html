@@ -319,7 +319,28 @@ Initially your 'demo-app' is using a Helm Chart deployed by laboratory admins, y
 <div class="ulist">
 <ul>
 <li>
-<p><strong>chart/values.yaml</strong>: contains the values applied to deploy the application.</p>
+<p><strong>deploy/Chart.yaml</strong>: contains the reference to the Helm Chart that Argo CD will use to deploy the application:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: v2
+name: demo-app
+description: Demo App
+type: application
+version: 1.0
+appVersion: "1.0.0"
+dependencies:
+- name: base-chart
+  repository: http://nexus.[cluster-api]/repository/helm/
+  version: 1.0.0</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>deploy/values.yaml</strong>: contains the values applied to the Helm Chart to deploy the application.</p>
 </li>
 </ul>
 </div>
@@ -353,27 +374,6 @@ Initially your 'demo-app' is using a Helm Chart deployed by laboratory admins, y
       injectEnv: true
       name: ui-config
       path: /usr/share/nginx/html/assets/config</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Chart.yaml</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>apiVersion: v2
-name: demo-app
-description: Demo App
-type: application
-version: 1.0
-appVersion: "1.0.0"
-dependencies:
-- name: base-chart
-  repository: http://nexus.[cluster-api]/repository/helm/
-  version: 1.0.0</pre>
 </div>
 </div>
 </div>
