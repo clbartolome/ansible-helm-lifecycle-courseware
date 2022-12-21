@@ -11,3 +11,25 @@ TODO: Content
 TODO: Content
 
 
+    - name: "Populate New Base Chart version {{ version }}"
+      ansible.builtin.set_stats:
+        data:
+          new_version: "{{ version }}"
+
+
+
+
+    - name: Send New Base Chart version Slack notification
+      community.general.slack:
+        token: "{{ lookup('env','SLACK_TOKEN') }}"
+        msg: |
+            ### Base Chart Pipeline ###
+            --------------------------------------
+            `Status`: Success.
+            `New Base Chart Version`: {{ new_version }}
+            --------------------------------------
+        channel: "{{ lookup('env','SLACK_CHANNEL') }}"
+        color: good
+        username: "<student>"
+        link_names: 0
+        parse: 'none'

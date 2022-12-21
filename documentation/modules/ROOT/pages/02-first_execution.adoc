@@ -1,24 +1,67 @@
 = First Execution
 include::_attributes.adoc[]
 
+IMPORTANT: During this laboratory exercises you will see *<student>* in some files and URLs, remember to update it with your assigned *student id*.
 
 [#webhook]
 == Configure Webhook
 
-TODO: content
+We have created a Helm Chart named *base-chart* that will help Operation Teams with cluster management. In order to make upgrades or fix issues in our *base-chart* we are going to create a pipeline that manages the Helm Chart lifecycle.
+
+The first step is creating a webhook in our *AAP Workflow* (pipeline) and configure it in *Gitea base-chart* repository, so we can trigger it when new features or fixes are commited in our repository.
+
+=== Create Webhook
+
+. Login into *Ansible Automation Platform* and go to: *Resources* > *Templates* > *[WF] Base Chart Pipeline* and click *edit*.
+. Enable the option *Enable Webhook*.
+. Under *Webhook details* select *GitHub* as *Webhook Service*.
+. Click *Save* to generate the *Webhook Key*.
+
+image::2-first-webhook.png[]
+
+NOTE: Copy the *Webhook Key* and the *Webhook URL*.
+
+=== Configure Webhook in Gitea
+
+. Login into *Gitea* and open *base-chart* repository.
+. Go to *Settings* (top right corner) > *Webhook* > *Add Webhook* > *Gitea*.
+. Configure the following fields:
+.. *Target URL*: Copy the *Webhook URL* from AAP.
+.. *Secret*: Copy the *Webhook Key* from AAP.
+.. Keep the rest of settings by default.
+. Click *Add Webhook*.
+
+image::2-first-giteawh.png[]
+
 
 [#nexus]
 == Configure Nexus
 
-TODO: content
+Nexus is going to be the repository where we're going to upload our packaged *base-chart*. In order to be able to upload it automatically as part of our pipeline, we need to modify the playbook where the chart is packaged and uploaded to point to your student repository in Nexus.
+
+. Login into *Gitea* and open *helm-ansible-pipeline* repository.
+. Open the playbook *05-helm-package-nexus.yml*.
+. Replace all *<student>* ocurrences with your student id. 
+. Click *Commit Changes*.
+
+image::2-first-nexus-playbook.png[]
 
 [#chart]
 == Update Chart Repository
 
-TODO: content
+Now it is time to trigger our *AAP Workflow*. To do so we're going to make a change in our *base-chart* repository, that change will automatically trigger the pipeline.
+
+. Login into *Gitea* and open *base-chart* repository.
+. Open the file *chart/Chart.yaml*.
+. Modify *version* to *1.0.0*.
+. Click *Commit Changes*.
+
+image::2-first-basechart.png[]
 
 [#validate]
 == Validate Execution
+
+Pipeline should be now running in *AAP* and the new version of *base-chart* should be in your student repository in Nexus, let's take a look at it.
 
 TODO: content
 

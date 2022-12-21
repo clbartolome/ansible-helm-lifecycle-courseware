@@ -14,6 +14,8 @@ This laboratory includes three repositories:
 * *base-chart*: Helm Chart used in this laboratory.
 * *demo-app*: web application to demonstrate the deployment of an application using the chart. Shows the versions of the application and the Helm chart used for its deployment.
 
+NOTE: During the laboratory you will have to make changes to this repositories. Laboratory instructions asume you are using Gitea web, but you can clone this 3 repositories if you feel more comfortable doing and pushing changes in your laptop. 
+
 [#aap]
 == Ansible Automation Platform
 
@@ -59,7 +61,9 @@ image::1-overview-argodetails.png[]
 There are two key files in that repository:
 
 * *deploy/Chart.yaml*: contains the reference to the Helm Chart that Argo CD will use to deploy the application:
-[,yaml]
+
+
+[source,yml,subs="attributes+,+macros"]	
 ----
 apiVersion: v2
 name: demo-app
@@ -74,7 +78,8 @@ dependencies:
 ----
 
 * *deploy/values.yaml*: contains the values applied to the Helm Chart to deploy the application. 
-[,yaml]
+
+[source,yml,subs="attributes+,+macros"]	
 ----
 base-chart:
   global:

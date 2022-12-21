@@ -12,6 +12,20 @@ The aim of this laboratory is to take you through the complete lifecycle of a He
 * Cluster housekeeping
 * Environments and cloud services
 
+The laboratory focus in the lifecycle of the 'base-chart':
+
+image::welcome.png[]
+
+. Operations team make a change in 'base-chart' repository (ex: new feature).
+. Previous change triggers a workflow in Ansible Automation Platform.
+. The workflow execute a set of job templates to:
+.. Setup testing environment in OpenShift.
+.. Deploy a testing application using the 'base-chart'.
+.. Validate a scenario.
+.. Clean up environment in OpenShift.
+. Package and upload the 'base-chart' new version to Nexus.
+. Send a notification if everything works as expected.
+
 The lab is divided into two blocks of sections. The first one, from section 1 to 5 is a set of guided exercises that will allow you to familiarize yourself with the environment. The last one is a section called 'Challenges', a set of exercises with no guide that will allow you to face more real scenarios in your own way.
 
 IMPORTANT: If you have any question or concern please let us know, we're more than happy to help!!

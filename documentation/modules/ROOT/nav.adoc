@@ -16,12 +16,11 @@
 * xref:03-testing_environment.adoc[3. Testing Environment]
 ** xref:03-testing_environment.adoc#create-ns[Create Namespace]
 ** xref:03-testing_environment.adoc#install-chart[Install Chart]
-** xref:03-testing_environment.adoc#unninstall-chart[Unninstall Chart]
+** xref:03-testing_environment.adoc#uninstall-chart[uninstall Chart]
 ** xref:03-testing_environment.adoc#delete-ns[Delete Namespace]
 
 * xref:04-validations.adoc[4. Validations]
 ** xref:04-validations.adoc#replicas[Replicas]
-** xref:04-validations.adoc#deployment[Deployment Image]
 ** xref:04-validations.adoc#route[Route]
 ** xref:04-validations.adoc#size[Size]
 
