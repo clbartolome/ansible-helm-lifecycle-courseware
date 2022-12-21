@@ -51,6 +51,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Welcome</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="01-overview.html">1. Overview</a>
@@ -179,11 +182,43 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Overview</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Access links and credentials for all this components should be provided by the <strong>laboratory team</strong>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="gitea"><a class="anchor" href="#gitea"></a>Gitea</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: content</p>
+<p>Gitea is a web-based collaborative software platform for hosting software development version control using Git as well as other collaborative features like bug tracking, code review, kanban boards, tickets, and wikis.</p>
+</div>
+<div class="paragraph">
+<p>This laboratory includes three repositories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>helm-ansible-pipeline</strong>: contains the templates that form the 'base-chart' pipeline (workflow) in AAP.</p>
+</li>
+<li>
+<p><strong>base-chart</strong>: Helm Chart used in this laboratory.</p>
+</li>
+<li>
+<p><strong>demo-app</strong>: web application to demonstrate the deployment of an application using the chart. Shows the versions of the application and the Helm chart used for its deployment.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -199,7 +234,32 @@
 <h2 id="ocp"><a class="anchor" href="#ocp"></a>OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: content</p>
+<p>OpenShift is Red Hat&#8217;s enterprise-ready Kubernetes platform. OpenShift is hosting all the applications used in this laboratory (AAP, Gitea, ArgoCD, Nexus, &#8230;&#8203;).</p>
+</div>
+<div class="paragraph">
+<p>As a laboratory student, you have an already created namespace named <strong>'student&lt;your number&gt;-demo-app'</strong> that contains an application used for testing the 'base-chart'. The application looks like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/1-overview-demoapp.png" alt="1 overview demoapp">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To review your 'demo-app' login into OpenShift, go to 'topology' and click the 'Open Url' button.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/1-overview-openurl.png" alt="1 overview openurl">
+</div>
 </div>
 </div>
 </div>
@@ -207,7 +267,27 @@
 <h2 id="nexus"><a class="anchor" href="#nexus"></a>Nexus</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: content</p>
+<p>Nexus is an open source repository that supports many artifacts formats like Java, Npm or Helm. In this laboratory we use Nexus to store the 'base-chart' Helm Chart packaged version.</p>
+</div>
+<div class="paragraph">
+<p>As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. Access nexus and go to 'Browse' to review your empty repository for helm packages.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/1-overview-nexus.png" alt="1 overview nexus">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Initially your 'demo-app' is using a Helm Chart deployed by laboratory admins, you will change that in next sections!
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -215,12 +295,91 @@
 <h2 id="argo"><a class="anchor" href="#argo"></a>Argo CD</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: content</p>
+<p>Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. Follows the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. In this laboratory we use Helm Charts to specify the Kubernetes manifests.</p>
+</div>
+<div class="paragraph">
+<p>Login into Argo CD to take a look at your 'demo-app' application and see the status and the resources' tree:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/1-overview-argoapp.png" alt="1 overview argoapp">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on the 'APP DETAILS' button to validate that Argo is pointing to your Gitea repository <strong>demo-app</strong>, <strong>master</strong> branch and the directory <strong>deploy</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/1-overview-argodetails.png" alt="1 overview argodetails">
+</div>
+</div>
+<div class="paragraph">
+<p>There are two key files in that repository:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>chart/values.yaml</strong>: contains the values applied to deploy the application.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>base-chart:
+  global:
+    nameOverride: demo-app
+  runtime: nginx
+  size: S
+  image:
+    name: image-registry.openshift-image-registry.svc:5000/demo-app/demo-app
+    tag: 1.0.0
+  extraLabels:
+    app.kubernetes.io/part-of: demo-app
+
+  deploy:
+    replicas: 1
+    strategy: RollingUpdate
+    ports:
+      - targetPort: 8080
+        protocol: TCP
+        name: http
+        port: 8080
+    route:
+      enabled: true
+      targetPort: http
+      tls:
+        enabled: false
+    configMap:
+      injectEnv: true
+      name: ui-config
+      path: /usr/share/nginx/html/assets/config</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Chart.yaml</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: v2
+name: demo-app
+description: Demo App
+type: application
+version: 1.0
+appVersion: "1.0.0"
+dependencies:
+- name: base-chart
+  repository: http://nexus.[cluster-api]/repository/helm/
+  version: 1.0.0</pre>
+</div>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="index.html">Ansible Helm Lifecycle Guide</a></span>
+  <span class="prev"><a href="index.html">Welcome</a></span>
   <span class="next"><a href="02-first_execution.html">2. First Execution</a></span>
 </nav>
 </article>
