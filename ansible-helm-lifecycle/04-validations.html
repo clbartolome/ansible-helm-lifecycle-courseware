@@ -146,7 +146,7 @@
     <a class="nav-link" href="06-challenges.html">6. Challenges</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#errors">Error Handling</a>
+    <a class="nav-link" href="06-challenges.html#validations">Aditional Validations</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="06-challenges.html#scenarios">Multiple Scenarios</a>
@@ -179,11 +179,226 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Validations</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that the namespace has been created and the test <strong>base-chart</strong> has been installed, we can start performing some tests to be sure the <strong>base-chart</strong> is working as expected.</p>
+</div>
+<div class="paragraph">
+<p>The first thing that we should do is create a task to download the <strong>base-chart</strong> code and read the scenario1 values so we can perform some validations.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_steps"></a>Steps</p>
+</li>
+<li>
+<p><a id="tabset1_solution"></a>Solution</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_steps">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
+</li>
+<li>
+<p>Add a task to clone <strong>base-chart</strong> repository (you can use /tmp/basechart as destination).</p>
+</li>
+<li>
+<p>Add a task to read the values of the scenario1 in <strong>/tmp/base-chart/test/scenario1/values.yaml</strong> as variables.</p>
+</li>
+<li>
+<p>Commit your changes.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/git_module.html">ansible.builtin.git</a></strong> to clone the repository.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/include_vars_module.html">ansible.builtin.include_vars</a></strong> read variables from a <strong>yaml</strong> file.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_solution">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
+</li>
+<li>
+<p>Add a task to clone <strong>base-chart</strong> repository (replace &lt;student&gt; with your student id):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Clone Base Chart remote repository
+  ansible.builtin.git:
+    repo: <a href="http://gitea.app-lifecycle-demo.svc:3000/&lt;student&gt;/base-chart.git" class="bare">http://gitea.app-lifecycle-demo.svc:3000/&lt;student&gt;/base-chart.git</a>
+    dest: /tmp/base-chart
+    version: master</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a task to read the values of the scenario1 in <strong>/tmp/base-chart/test/scenario1/values.yaml</strong> as variables:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Read scenario values
+  ansible.builtin.include_vars:
+    file: "/tmp/base-chart/test/scenario1/values.yaml"
+    name: scenario</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Commit your changes.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="replicas"><a class="anchor" href="#replicas"></a>Replicas</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: Content</p>
+<p>In this test we&#8217;re going to validate if the number of replicas we defined in our scenario1 is the same as the number of replicas that we have in the <strong>base-chart</strong> that we&#8217;ve installed.</p>
+</div>
+<div class="paragraph">
+<p>To achive that we&#8217;re going to read the deployment object and check the running replicas.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_steps"></a>Steps</p>
+</li>
+<li>
+<p><a id="tabset2_solution"></a>Solution</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_steps">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
+</li>
+<li>
+<p>Add a task to get the <strong>deployment</strong> that it is running in your test namespace.</p>
+</li>
+<li>
+<p>Add a task to compare the running <strong>deployment</strong> replicas with the defined in the scenario1 values (set the already defined variable <strong>failed</strong> as true if it is different).</p>
+</li>
+<li>
+<p>Commit your changes.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/collections/kubernetes/core/k8s_module.html">kubernetes.core.k8s</a></strong> to get the deployment.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_solution">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
+</li>
+<li>
+<p>Add a task to get the <strong>deployment</strong> that it is running in your test namespace:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Test - Deployment --&gt; Get deployment
+  kubernetes.core.k8s_info:
+    api_version: apps/v1
+    kind: Deployment
+    namespace: "&lt;student&gt;-base-chart"
+    label_selectors:
+      - app={{ helm_test_scenario }}
+  ignore_errors: true
+  register: scenario_deployment</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a task to compare the running <strong>deployment</strong> replicas with the defined in the scenario1 values (set the already defined variable <strong>failed</strong> as true if it is different):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Test - Deployment --&gt; Validate the number of replicas is correct
+  ansible.builtin.set_fact:
+    failed: true
+  when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Commit your changes.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -203,35 +418,13 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>      - name: Clone Base Chart remote repository
-          ansible.builtin.git:
-            repo: http://gitea.app-lifecycle-demo.svc:3000/gitea/base-chart.git
-            dest: /tmp/base-chart
-            version: master
-
-        - name: Read scenario values
-          ansible.builtin.include_vars:
-            file: "/tmp/base-chart/test/scenario1/values.yaml"
-            name: scenario
-
-        ########################################################################
+<pre>        ########################################################################
         # Deployment Tests
         ########################################################################
 
-        - name: Test - Deployment --&gt; Get deployment
-          kubernetes.core.k8s_info:
-            api_version: apps/v1
-            kind: Deployment
-            namespace: "&lt;student&gt;-base-chart"
-            label_selectors:
-              - app={{ helm_test_scenario }}
-          ignore_errors: true
-          register: scenario_deployment
 
-        - name: Test - Deployment --&gt; Validate the number of replicas is correct
-          ansible.builtin.set_fact:
-            failed: true
-          when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas
+
+
 
         - name: DEPLOY
           debug:
