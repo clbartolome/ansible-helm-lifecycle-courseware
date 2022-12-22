@@ -1,9 +1,112 @@
 = Validations
 
+Now that the namespace has been created and the test *base-chart* has been installed, we can start performing some tests to be sure the *base-chart* is working as expected.
+
+The first thing that we should do is create a task to download the *base-chart* code and read the scenario1 values so we can perform some validations.
+
+[tabs, subs="attributes+,+macros"]	
+====	
+Steps::	
++	
+--	
+* Go to *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *02-validate-test-scenario.yml* and edit it.
+* Add a task to clone *base-chart* repository (you can use /tmp/basechart as destination).
+* Add a task to read the values of the scenario1 in */tmp/base-chart/test/scenario1/values.yaml* as variables.
+* Commit your changes.
+
+TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/ansible/builtin/git_module.html[ansible.builtin.git]* to clone the repository.
+
+TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/ansible/builtin/include_vars_module.html[ansible.builtin.include_vars]* read variables from a *yaml* file.
+
+--	
+Solution::	
++	
+--	
+* Go to *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *02-validate-test-scenario.yml* and edit it.
+* Add a task to clone *base-chart* repository (replace <student> with your student id):
+
+[.console-input]
+[source,yml,subs="attributes+,+macros"]	
+----	
+- name: Clone Base Chart remote repository
+  ansible.builtin.git:
+    repo: http://gitea.app-lifecycle-demo.svc:3000/<student>/base-chart.git
+    dest: /tmp/base-chart
+    version: master
+----	
+
+* Add a task to read the values of the scenario1 in */tmp/base-chart/test/scenario1/values.yaml* as variables:
+
+[.console-input]
+[source,yml,subs="attributes+,+macros"]	
+----	
+- name: Read scenario values
+  ansible.builtin.include_vars:
+    file: "/tmp/base-chart/test/scenario1/values.yaml"
+    name: scenario
+----	
+
+* Commit your changes.
+====
+
 [#replicas]
 == Replicas
 
-TODO: Content
+In this test we're going to validate if the number of replicas we defined in our scenario1 is the same as the number of replicas that we have in the *base-chart* that we've installed.
+
+To achive that we're going to read the deployment object and check the running replicas.
+
+[tabs, subs="attributes+,+macros"]	
+====	
+Steps::	
++	
+--	
+* Go to *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *02-validate-test-scenario.yml* and edit it.
+* Add a task to get the *deployment* that it is running in your test namespace.
+* Add a task to compare the running *deployment* replicas with the defined in the scenario1 values (set the already defined variable *failed* as true if it is different).
+* Commit your changes.
+
+TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/kubernetes/core/k8s_module.html[kubernetes.core.k8s]* to get the deployment.
+
+--	
+Solution::	
++	
+--	
+* Go to *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *02-validate-test-scenario.yml* and edit it.
+* Add a task to get the *deployment* that it is running in your test namespace:
+
+[.console-input]
+[source,yml,subs="attributes+,+macros"]	
+----	
+- name: Test - Deployment --> Get deployment
+  kubernetes.core.k8s_info:
+    api_version: apps/v1
+    kind: Deployment
+    namespace: "<student>-base-chart"
+    label_selectors:
+      - app={{ helm_test_scenario }}
+  ignore_errors: true
+  register: scenario_deployment
+----	
+
+* Add a task to compare the running *deployment* replicas with the defined in the scenario1 values (set the already defined variable *failed* as true if it is different):
+
+[.console-input]
+[source,yml,subs="attributes+,+macros"]	
+----	
+- name: Test - Deployment --> Validate the number of replicas is correct
+  ansible.builtin.set_fact:
+    failed: true
+  when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas
+----	
+
+* Commit your changes.
+====
+
 
 [#route]
 == Route
@@ -21,35 +124,13 @@ TODO: Content
 ------
 
 
-      - name: Clone Base Chart remote repository
-          ansible.builtin.git:
-            repo: http://gitea.app-lifecycle-demo.svc:3000/gitea/base-chart.git
-            dest: /tmp/base-chart
-            version: master
-
-        - name: Read scenario values
-          ansible.builtin.include_vars:
-            file: "/tmp/base-chart/test/scenario1/values.yaml"
-            name: scenario
-
         ########################################################################
         # Deployment Tests
         ########################################################################
 
-        - name: Test - Deployment --> Get deployment
-          kubernetes.core.k8s_info:
-            api_version: apps/v1
-            kind: Deployment
-            namespace: "<student>-base-chart"
-            label_selectors:
-              - app={{ helm_test_scenario }}
-          ignore_errors: true
-          register: scenario_deployment
+        
 
-        - name: Test - Deployment --> Validate the number of replicas is correct
-          ansible.builtin.set_fact:
-            failed: true
-          when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas
+
 
         - name: DEPLOY
           debug:
@@ -92,3 +173,9 @@ TODO: Content
           ansible.builtin.set_fact:
             failed: true
           when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length > 0 and route_response.status != 200
+
+
+
+
+
+          

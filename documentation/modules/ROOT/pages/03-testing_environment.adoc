@@ -37,6 +37,7 @@ deploy:
 
 NOTE: For testing purposes we're using the image *openshift/hello-openshift* which is an application that exposes a REST endpoint that returns either *Hello OpenShift!* or the value of the environment variable *RESPONSE*. This has nothing to do with our *demo-app*.
 
+TODO: explain how to manually run the workflow!
 
 [#create-ns]
 == Create Namespace

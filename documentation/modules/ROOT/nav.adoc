@@ -29,6 +29,6 @@
 ** xref:05-notification.adoc#task[Task]
 
 * xref:06-challenges.adoc[6. Challenges]
-** xref:06-challenges.adoc#errors[Error Handling]
+** xref:06-challenges.adoc#validations[Aditional Validations]
 ** xref:06-challenges.adoc#scenarios[Multiple Scenarios]
 ** xref:06-challenges.adoc#sizes[New Sizes]
