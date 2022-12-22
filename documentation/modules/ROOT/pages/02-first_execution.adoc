@@ -12,10 +12,10 @@ The first step is creating a webhook in our *AAP Workflow* (pipeline) and config
 
 === Create Webhook
 
-. Login into *Ansible Automation Platform* and go to: *Resources* > *Templates* > *[WF] Base Chart Pipeline* and click *edit*.
-. Enable the option *Enable Webhook*.
-. Under *Webhook details* select *GitHub* as *Webhook Service*.
-. Click *Save* to generate the *Webhook Key*.
+* Login into *Ansible Automation Platform* and go to: *Resources* > *Templates* > *[WF] Base Chart Pipeline* and click *edit*.
+* Enable the option *Enable Webhook*.
+* Under *Webhook details* select *GitHub* as *Webhook Service*.
+* Click *Save* to generate the *Webhook Key*.
 
 image::2-first-webhook.png[]
 
@@ -23,13 +23,13 @@ NOTE: Copy the *Webhook Key* and the *Webhook URL*.
 
 === Configure Webhook in Gitea
 
-. Login into *Gitea* and open *base-chart* repository.
-. Go to *Settings* (top right corner) > *Webhook* > *Add Webhook* > *Gitea*.
-. Configure the following fields:
-.. *Target URL*: Copy the *Webhook URL* from AAP.
-.. *Secret*: Copy the *Webhook Key* from AAP.
-.. Keep the rest of settings by default.
-. Click *Add Webhook*.
+* Login into *Gitea* and open *base-chart* repository.
+* Go to *Settings* (top right corner) > *Webhook* > *Add Webhook* > *Gitea*.
+* Configure the following fields:
+** *Target URL*: Copy the *Webhook URL* from AAP.
+** *Secret*: Copy the *Webhook Key* from AAP.
+** Keep the rest of settings by default.
+* Click *Add Webhook*.
 
 image::2-first-giteawh.png[]
 
@@ -39,22 +39,23 @@ image::2-first-giteawh.png[]
 
 Nexus is going to be the repository where we're going to upload our packaged *base-chart*. In order to be able to upload it automatically as part of our pipeline, we need to modify the playbook where the chart is packaged and uploaded to point to your student repository in Nexus.
 
-. Login into *Gitea* and open *helm-ansible-pipeline* repository.
-. Open the playbook *05-helm-package-nexus.yml*.
-. Replace all *<student>* ocurrences with your student id. 
-. Click *Commit Changes*.
+* Login into *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *05-helm-package-nexus.yml*.
+* Replace all *<student>* ocurrences with your student id. 
+* Click *Commit Changes*.
 
 image::2-first-nexus-playbook.png[]
+TODO change image
 
 [#chart]
 == Update Chart Repository
 
 Now it is time to trigger our *AAP Workflow*. To do so we're going to make a change in our *base-chart* repository, that change will automatically trigger the pipeline.
 
-. Login into *Gitea* and open *base-chart* repository.
-. Open the file *chart/Chart.yaml*.
-. Modify *version* to *1.0.0*.
-. Click *Commit Changes*.
+* Login into *Gitea* and open *base-chart* repository.
+* Open the file *chart/Chart.yaml*.
+* Modify *version* to *1.0.0*.
+* Click *Commit Changes*.
 
 image::2-first-basechart.png[]
 
@@ -63,73 +64,63 @@ image::2-first-basechart.png[]
 
 Pipeline should be now running in *AAP* and the new version of *base-chart* should be in your student repository in Nexus, let's take a look at it.
 
-TODO: content
+* Login into *Ansible Automation Platform* and go to: *Views* > *Jobs* > *[WF] Base Chart Pipeline* (last execution):
+
+image::2-first-aap-wf.png[]
+
+* Access the *Workflow* to review the execution, all *JobTemplates* should have a green check:
+
+image::2-first-wf-view.png[]
+
+Now let's login into *Nexus* > *Browse* > *<student>* to validate that the new version of your *base-chart* has been uploaded.
+
+image::2-first-nx-chart.png[]
 
 [#app]
 == Update Application
 
-TODO: content
+Currently your *demo-app* deployment in *ArgoCD* is pointing to an initial version  *base-chart-0.0.1*. In order to update it and use the new version that we've just created, we need to update the deployment files in *ArgoCD*.
+
+* Login into *Gitea* and open *demo-app* repository.
+* Open the file *deploy/Chart.yaml* and update the chart reference (replace <student> with your student id):
+
+[.console-input]
+[source,yml,subs="attributes+,+macros"]	
+----	
+apiVersion: v2
+name: demo-app
+description: Demo App
+type: application
+version: 1.0
+appVersion: "1.0.0"
+dependencies:
+- name: base-chart
+  repository: http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/<student>/
+  version: 1.0.0
+----	
+
+* Commit your changes.
+
+* Login into *ArgoCD* and open your *demo-app* application. *ArgoCD* automatically sync each 3 minutes. To manually force *ArgoCD* synchronization press *SYNC* (use the default synchronization values). Now you should see your changes applied in the section *LAST SYNC RESULT*.
+
+image::2-first-argo.png[]
+
+* Login into OpenShift and go to *Topology* and select your *<student>-demo-app* namespace.
+* Open your *deployment* clicking on the *NGINX* icon:
+
+image::2-first-ocp-ov.png[]
+
+* Use the *URL* button to open your application, the chart version should be *base-chart-1.0.0*:
+
+image::2-first-demo-app.png[]
+
+* Click on *demo-app-xxx* pod link to review pod details and validate the pod have a label *2-first-ocp-ov.png*:
+
+image::2-first-pod-labels.png[]
+
+NOTE: Review the other labels added by the *base-chart* to help on cluster housekeeping tasks.
 
 
-// [#service]
-// == The Service
-// 
-// The code:
-// 
-// [.lines_7]
-// [.console-input]
-// [source, java,subs="+macros,+attributes"]
-// ----
-// public class Main {
-// 
-//     public static void main(String[] args) {
-// 
-//     } 
-// 
-// }
-// 
-// ./mvnw compile
-// ----
-// 
-// [#package]
-// == Packaging the Service
-// 
-// You can package the next bash script:
-// 
-// [source,bash,subs="+macros,+attributes"]
-// ----
-// include::example$run.sh[]
-// ----
-// 
-// [#deploy]
-// == Deploy the Service
-// 
-// And then you can deploy the service and execute commands inside:
-// 
-// :podname: apps
-// 
-// include::partial$exec_pod.adoc[]
-// 
-// :!podname:
-// 
-// == Exercise (example with solution)
-// [tabs, subs="attributes+,+macros"]	
-// ====	
-// Exercise::	
-// +	
-// --	
-// Exercise description:
-// 
-// Blah blah blah...
-// --	
-// Solution::	
-// +	
-// --	
-// Solution description:
-// 
-// [.console-input]
-// [source,bash,subs="attributes+,+macros"]	
-// ----	
-// some command	
-// ----	
-// ====
+
+
+

@@ -69,14 +69,14 @@ Solution::
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-    - name: Create Base Chart test namespace
-      kubernetes.core.k8s:
-        definition:
-          apiVersion: v1
-          kind: Namespace
-          metadata:
-            name: "<student>-base-chart"
-        state: present	
+- name: Create Base Chart test namespace
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "<student>-base-chart"
+    state: present	
 ----	
 
 * Commit your changes.
@@ -115,11 +115,11 @@ Solution::
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-    - name: Clone Base Chart remote repository
-      ansible.builtin.git:
-        repo: http://gitea.app-lifecycle-demo.svc:3000/<student>/base-chart.git
-        dest: /tmp/base-chart
-        version: master
+- name: Clone Base Chart remote repository
+  ansible.builtin.git:
+    repo: http://gitea.app-lifecycle-demo.svc:3000/<student>/base-chart.git
+    dest: /tmp/base-chart
+    version: master
 ----	
 
 * Add a task to install the scenario1. Chart is in */base-chart/chart* and values are in */base-chart/test/scenario1/values.yaml* (replace <student> with your student id):
@@ -127,15 +127,15 @@ Solution::
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-    - name: "Install Helm test scenario 1"
-      kubernetes.core.helm:
-        name: "scenario1"
-        chart_ref: "/tmp/base-chart/chart"
-        release_namespace: "<student>-base-chart"
-        wait: yes
-        values_files:
-          - "/tmp/base-chart/test/scenario1/values.yaml"
-      register: install_output
+- name: "Install Helm test scenario 1"
+  kubernetes.core.helm:
+    name: "scenario1"
+    chart_ref: "/tmp/base-chart/chart"
+    release_namespace: "<student>-base-chart"
+    wait: yes
+    values_files:
+      - "/tmp/base-chart/test/scenario1/values.yaml"
+  register: install_output
 ----	
 
 * Commit your changes.
@@ -171,13 +171,13 @@ Solution::
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-    - name: Uninstall  Helm test scenario
-      kubernetes.core.helm:
-        name: "scenario1"
-        chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
-        release_namespace: "<student>-base-chart"
-        state: absent
-        wait: yes
+- name: Uninstall  Helm test scenario
+  kubernetes.core.helm:
+    name: "scenario1"
+    chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
+    release_namespace: "<student>-base-chart"
+    state: absent
+    wait: yes
 ----	
 
 * Commit your changes.
@@ -212,14 +212,14 @@ Solution::
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-    - name: Delete Base Chart test namespace
-      kubernetes.core.k8s:
-        definition:
-          apiVersion: v1
-          kind: Namespace
-          metadata:
-            name: "<student>-base-chart"
-        state: absent
+- name: Delete Base Chart test namespace
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "<student>-base-chart"
+    state: absent
 ----	
 
 * Commit your changes.
