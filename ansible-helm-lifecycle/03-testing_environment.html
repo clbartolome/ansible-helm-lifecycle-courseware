@@ -298,14 +298,14 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">    - name: Create Base Chart test namespace
-      kubernetes.core.k8s:
-        definition:
-          apiVersion: v1
-          kind: Namespace
-          metadata:
-            name: "&lt;student&gt;-base-chart"
-        state: present</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Create Base Chart test namespace
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "&lt;student&gt;-base-chart"
+    state: present</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -411,11 +411,11 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">    - name: Clone Base Chart remote repository
-      ansible.builtin.git:
-        repo: <a href="http://gitea.app-lifecycle-demo.svc:3000/&lt;student&gt;/base-chart.git" class="bare">http://gitea.app-lifecycle-demo.svc:3000/&lt;student&gt;/base-chart.git</a>
-        dest: /tmp/base-chart
-        version: master</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Clone Base Chart remote repository
+  ansible.builtin.git:
+    repo: <a href="http://gitea.app-lifecycle-demo.svc:3000/&lt;student&gt;/base-chart.git" class="bare">http://gitea.app-lifecycle-demo.svc:3000/&lt;student&gt;/base-chart.git</a>
+    dest: /tmp/base-chart
+    version: master</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -427,15 +427,15 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">    - name: "Install Helm test scenario 1"
-      kubernetes.core.helm:
-        name: "scenario1"
-        chart_ref: "/tmp/base-chart/chart"
-        release_namespace: "&lt;student&gt;-base-chart"
-        wait: yes
-        values_files:
-          - "/tmp/base-chart/test/scenario1/values.yaml"
-      register: install_output</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: "Install Helm test scenario 1"
+  kubernetes.core.helm:
+    name: "scenario1"
+    chart_ref: "/tmp/base-chart/chart"
+    release_namespace: "&lt;student&gt;-base-chart"
+    wait: yes
+    values_files:
+      - "/tmp/base-chart/test/scenario1/values.yaml"
+  register: install_output</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -526,13 +526,13 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">    - name: Uninstall  Helm test scenario
-      kubernetes.core.helm:
-        name: "scenario1"
-        chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
-        release_namespace: "&lt;student&gt;-base-chart"
-        state: absent
-        wait: yes</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Uninstall  Helm test scenario
+  kubernetes.core.helm:
+    name: "scenario1"
+    chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
+    release_namespace: "&lt;student&gt;-base-chart"
+    state: absent
+    wait: yes</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -611,14 +611,14 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">    - name: Delete Base Chart test namespace
-      kubernetes.core.k8s:
-        definition:
-          apiVersion: v1
-          kind: Namespace
-          metadata:
-            name: "&lt;student&gt;-base-chart"
-        state: absent</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Delete Base Chart test namespace
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "&lt;student&gt;-base-chart"
+    state: absent</code></pre>
 </div>
 </div>
 <div class="ulist">

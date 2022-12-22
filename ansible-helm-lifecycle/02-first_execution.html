@@ -206,8 +206,8 @@ During this laboratory exercises you will see <strong>&lt;student&gt;</strong> i
 </div>
 <div class="sect2">
 <h3 id="_create_webhook"><a class="anchor" href="#_create_webhook"></a>Create Webhook</h3>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>Login into <strong>Ansible Automation Platform</strong> and go to: <strong>Resources</strong> &gt; <strong>Templates</strong> &gt; <strong>[WF] Base Chart Pipeline</strong> and click <strong>edit</strong>.</p>
 </li>
@@ -220,7 +220,7 @@ During this laboratory exercises you will see <strong>&lt;student&gt;</strong> i
 <li>
 <p>Click <strong>Save</strong> to generate the <strong>Webhook Key</strong>.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -242,8 +242,8 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 </div>
 <div class="sect2">
 <h3 id="_configure_webhook_in_gitea"><a class="anchor" href="#_configure_webhook_in_gitea"></a>Configure Webhook in Gitea</h3>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>Login into <strong>Gitea</strong> and open <strong>base-chart</strong> repository.</p>
 </li>
@@ -252,8 +252,8 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 </li>
 <li>
 <p>Configure the following fields:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Target URL</strong>: Copy the <strong>Webhook URL</strong> from AAP.</p>
 </li>
@@ -263,13 +263,13 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <li>
 <p>Keep the rest of settings by default.</p>
 </li>
-</ol>
+</ul>
 </div>
 </li>
 <li>
 <p>Click <strong>Add Webhook</strong>.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -285,8 +285,8 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <div class="paragraph">
 <p>Nexus is going to be the repository where we&#8217;re going to upload our packaged <strong>base-chart</strong>. In order to be able to upload it automatically as part of our pipeline, we need to modify the playbook where the chart is packaged and uploaded to point to your student repository in Nexus.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>Login into <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
 </li>
@@ -299,12 +299,15 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <li>
 <p>Click <strong>Commit Changes</strong>.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/2-first-nexus-playbook.png" alt="2 first nexus playbook">
 </div>
+</div>
+<div class="paragraph">
+<p>TODO change image</p>
 </div>
 </div>
 </div>
@@ -314,8 +317,8 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <div class="paragraph">
 <p>Now it is time to trigger our <strong>AAP Workflow</strong>. To do so we&#8217;re going to make a change in our <strong>base-chart</strong> repository, that change will automatically trigger the pipeline.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p>Login into <strong>Gitea</strong> and open <strong>base-chart</strong> repository.</p>
 </li>
@@ -328,7 +331,7 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <li>
 <p>Click <strong>Commit Changes</strong>.</p>
 </li>
-</ol>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -343,8 +346,37 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <div class="paragraph">
 <p>Pipeline should be now running in <strong>AAP</strong> and the new version of <strong>base-chart</strong> should be in your student repository in Nexus, let&#8217;s take a look at it.</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Login into <strong>Ansible Automation Platform</strong> and go to: <strong>Views</strong> &gt; <strong>Jobs</strong> &gt; <strong>[WF] Base Chart Pipeline</strong> (last execution):</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-aap-wf.png" alt="2 first aap wf">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access the <strong>Workflow</strong> to review the execution, all <strong>JobTemplates</strong> should have a green check:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-wf-view.png" alt="2 first wf view">
+</div>
+</div>
 <div class="paragraph">
-<p>TODO: content</p>
+<p>Now let&#8217;s login into <strong>Nexus</strong> &gt; <strong>Browse</strong> &gt; <strong>&lt;student&gt;</strong> to validate that the new version of your <strong>base-chart</strong> has been uploaded.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-nx-chart.png" alt="2 first nx chart">
+</div>
 </div>
 </div>
 </div>
@@ -352,7 +384,97 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <h2 id="app"><a class="anchor" href="#app"></a>Update Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: content</p>
+<p>Currently your <strong>demo-app</strong> deployment in <strong>ArgoCD</strong> is pointing to an initial version  <strong>base-chart-0.0.1</strong>. In order to update it and use the new version that we&#8217;ve just created, we need to update the deployment files in <strong>ArgoCD</strong>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Login into <strong>Gitea</strong> and open <strong>demo-app</strong> repository.</p>
+</li>
+<li>
+<p>Open the file <strong>deploy/Chart.yaml</strong> and update the chart reference (replace &lt;student&gt; with your student id):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">apiVersion: v2
+name: demo-app
+description: Demo App
+type: application
+version: 1.0
+appVersion: "1.0.0"
+dependencies:
+- name: base-chart
+  repository: <a href="http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/&lt;student&gt;/" class="bare">http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/&lt;student&gt;/</a>
+  version: 1.0.0</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Commit your changes.</p>
+</li>
+<li>
+<p>Login into <strong>ArgoCD</strong> and open your <strong>demo-app</strong> application. <strong>ArgoCD</strong> automatically sync each 3 minutes. To manually force <strong>ArgoCD</strong> synchronization press <strong>SYNC</strong> (use the default synchronization values). Now you should see your changes applied in the section <strong>LAST SYNC RESULT</strong>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-argo.png" alt="2 first argo">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Login into OpenShift and go to <strong>Topology</strong> and select your <strong>&lt;student&gt;-demo-app</strong> namespace.</p>
+</li>
+<li>
+<p>Open your <strong>deployment</strong> clicking on the <strong>NGINX</strong> icon:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-ocp-ov.png" alt="2 first ocp ov">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use the <strong>URL</strong> button to open your application, the chart version should be <strong>base-chart-1.0.0</strong>:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-demo-app.png" alt="2 first demo app">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on <strong>demo-app-xxx</strong> pod link to review pod details and validate the pod have a label <strong>2-first-ocp-ov.png</strong>:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-pod-labels.png" alt="2 first pod labels">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Review the other labels added by the <strong>base-chart</strong> to help on cluster housekeeping tasks.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
