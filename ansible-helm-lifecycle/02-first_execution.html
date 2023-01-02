@@ -315,7 +315,7 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <h2 id="chart"><a class="anchor" href="#chart"></a>Update Chart Repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now it is time to trigger our <strong>AAP Workflow</strong>. To do so we&#8217;re going to make a change in our <strong>base-chart</strong> repository, that change will automatically trigger the pipeline.</p>
+<p>Now it is time to trigger our <strong>AAP Workflow</strong>. To do so we&#8217;re going to make a change in our <strong>base-chart</strong> repository and that change will automatically trigger the pipeline.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -384,7 +384,7 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <h2 id="app"><a class="anchor" href="#app"></a>Update Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Currently your <strong>demo-app</strong> deployment in <strong>ArgoCD</strong> is pointing to an initial version  <strong>base-chart-0.0.1</strong>. In order to update it and use the new version that we&#8217;ve just created, we need to update the deployment files in <strong>ArgoCD</strong>.</p>
+<p>Currently your <strong>demo-app</strong> deployment in <strong>ArgoCD</strong> is pointing to an initial version named <strong>base-chart-0.0.1</strong>. In order to update it and use the new version that we&#8217;ve just created, we need to update the deployment files in <strong>ArgoCD</strong>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -392,7 +392,7 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <p>Login into <strong>Gitea</strong> and open <strong>demo-app</strong> repository.</p>
 </li>
 <li>
-<p>Open the file <strong>deploy/Chart.yaml</strong> and update the chart reference (replace &lt;student&gt; with your student id):</p>
+<p>Open the file <strong>deploy/Chart.yaml</strong> and update the chart reference (<mark>replace &lt;student&gt; with your student id</mark>):</p>
 </li>
 </ul>
 </div>
@@ -416,7 +416,7 @@ dependencies:
 <p>Commit your changes.</p>
 </li>
 <li>
-<p>Login into <strong>ArgoCD</strong> and open your <strong>demo-app</strong> application. <strong>ArgoCD</strong> automatically sync each 3 minutes. To manually force <strong>ArgoCD</strong> synchronization press <strong>SYNC</strong> (use the default synchronization values). Now you should see your changes applied in the section <strong>LAST SYNC RESULT</strong>.</p>
+<p>Login into <strong>ArgoCD</strong> and open your <strong>demo-app</strong> application. <strong>ArgoCD</strong> automatically syncs each 3 minutes but we can manually force <strong>ArgoCD</strong> synchronization by pressing the <strong>SYNC</strong> button (use the default synchronization values). Now you should see your changes applied in the section <strong>LAST SYNC RESULT</strong>.</p>
 </li>
 </ul>
 </div>
@@ -455,7 +455,7 @@ dependencies:
 <div class="ulist">
 <ul>
 <li>
-<p>Click on <strong>demo-app-xxx</strong> pod link to review pod details and validate the pod have a label <strong>2-first-ocp-ov.png</strong>:</p>
+<p>Click on <strong>demo-app-xxx</strong> pod link to review pod details and validate the pod have a label <strong>helm.sh/chart:base-chart-1.0.0</strong>:</p>
 </li>
 </ul>
 </div>

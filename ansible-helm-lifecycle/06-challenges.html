@@ -178,11 +178,87 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Challenges</h1>
-<div class="sect1">
-<h2 id="errors"><a class="anchor" href="#errors"></a>Aditional Validations</h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: Content</p>
+<p>First of all, <strong>CONGRATULATIONS</strong> for getting to this point of the Lab!!</p>
+</div>
+<div class="paragraph">
+<p>You should already have a good understanding of what we are trying to achieve and therefore it is time for us to get closer to what our <strong>base-chart&#8217;s lifecycle</strong> would look like in real scenarios.</p>
+</div>
+<div class="paragraph">
+<p>We would like to propose a series of challenges that we consider important for the management of the base-chart. In any case, if you want to continue in another way, perfect! But please keep us informed so we can learn too!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="validations"><a class="anchor" href="#validations"></a>Aditional Validations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We&#8217;ve included some validations in previous sections but there are more resources managed by the <strong>base-chart</strong> that we should validate:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Labels.</p>
+</li>
+<li>
+<p>Deployment:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Strategy.</p>
+</li>
+<li>
+<p>Ports.</p>
+</li>
+<li>
+<p>Liveness and readiness probes.</p>
+</li>
+<li>
+<p>Environment variables.</p>
+</li>
+<li>
+<p>Volumes.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Service.</p>
+</li>
+<li>
+<p>Route:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Host.</p>
+</li>
+<li>
+<p>TLS configuration.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>ConfigMap.</p>
+</li>
+<li>
+<p>Secret.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Take a look at the <strong>Multiple Scenarios</strong> challenge to simplify the testing of all the resources.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -190,7 +266,27 @@
 <h2 id="scenarios"><a class="anchor" href="#scenarios"></a>Multiple Scenarios</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: Content</p>
+<p>Currently as part of the <strong>base-chart</strong> pipeline we&#8217;re just installing one scenario. The idea would be to install different scenarios at the same time and perform validations on parallel.</p>
+</div>
+<div class="paragraph">
+<p>This is an example diagram of how the pipeline could look like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/6-challenges-parallel.jpg" alt="6 challenges parallel">
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Be careful with the error management. Would be interesting to, instead of just failing, print a list of all scenarios errors or send a notification with all errors?
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -198,8 +294,95 @@
 <h2 id="sizes"><a class="anchor" href="#sizes"></a>New Sizes</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: Content</p>
+<p>The <strong>base-chart</strong> have just the size <strong>S</strong> configured, it is time to include more sizes so we can adapt the deployment to the application performance requirements.</p>
 </div>
+<div class="paragraph">
+<p>Find below a table with some sizes:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">Size</th>
+<th class="tableblock halign-center valign-top">Property</th>
+<th class="tableblock halign-center valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-middle" rowspan="4"><p class="tableblock">XS</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">50m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">128Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">50m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">128Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-middle" rowspan="4"><p class="tableblock">S</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">256Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">256Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-middle" rowspan="4"><p class="tableblock">M</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">512Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">512Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-middle" rowspan="4"><p class="tableblock">L</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1Gi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1Gi</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <nav class="pagination">

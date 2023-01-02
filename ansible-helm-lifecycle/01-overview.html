@@ -199,7 +199,7 @@ Access links and credentials for all this components should be provided by the <
 <h2 id="gitea"><a class="anchor" href="#gitea"></a>Gitea</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Gitea is a web-based collaborative software platform for hosting software development version control using Git as well as other collaborative features like bug tracking, code review, kanban boards, tickets, and wikis.</p>
+<p>Gitea is a web-based collaborative software platform for hosting software development version control using Git, as well as other collaborative features like bug tracking, code review, kanban boards, tickets, and wikis.</p>
 </div>
 <div class="paragraph">
 <p>This laboratory includes three repositories:</p>
@@ -207,10 +207,10 @@ Access links and credentials for all this components should be provided by the <
 <div class="ulist">
 <ul>
 <li>
-<p><strong>helm-ansible-pipeline</strong>: contains the templates that form the <strong>base-chart</strong> pipeline (workflow) in AAP.</p>
+<p><strong>base-chart</strong>: Helm Chart used in this laboratory to deploy applications and whose lifecycle we are going to work on.</p>
 </li>
 <li>
-<p><strong>base-chart</strong>: Helm Chart used in this laboratory.</p>
+<p><strong>helm-ansible-pipeline</strong>: contains the templates that form the <strong>base-chart</strong> pipeline (workflow) in Ansible Automation Platform.</p>
 </li>
 <li>
 <p><strong>demo-app</strong>: web application to demonstrate the deployment of an application using the chart. Shows the versions of the application and the Helm chart used for its deployment.</p>
@@ -224,7 +224,7 @@ Access links and credentials for all this components should be provided by the <
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-During the laboratory you will have to make changes to this repositories. Laboratory instructions asume you are using Gitea web, but you can clone this 3 repositories if you feel more comfortable doing and pushing changes in your laptop.
+During the laboratory you will have to make changes to this repositories. Laboratory instructions asume you are using Gitea web site, but you can clone these 3 repositories if you feel more comfortable doing and pushing changes in your laptop.
 </td>
 </tr>
 </table>
@@ -243,10 +243,10 @@ During the laboratory you will have to make changes to this repositories. Labora
 <h2 id="ocp"><a class="anchor" href="#ocp"></a>OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenShift is Red Hat&#8217;s enterprise-ready Kubernetes platform. OpenShift is hosting all the applications used in this laboratory (AAP, Gitea, ArgoCD, Nexus, &#8230;&#8203;).</p>
+<p>OpenShift is Red Hat&#8217;s enterprise-ready Kubernetes platform. OpenShift is hosting all the components used in this laboratory (AAP, Gitea, ArgoCD, Nexus, &#8230;&#8203;).</p>
 </div>
 <div class="paragraph">
-<p>As a laboratory student, you have an already created namespace named <strong>student&lt;your number&gt;-demo-app</strong> that contains an application used for testing the <strong>base-chart</strong>. The application looks like this:</p>
+<p>As a laboratory student, you have an already created namespace named <strong>&lt;student&gt;-demo-app</strong> that contains an application used for testing the <strong>base-chart</strong>. The application looks like this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -260,7 +260,7 @@ During the laboratory you will have to make changes to this repositories. Labora
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-To review your <strong>demo-app</strong> login into OpenShift, go to <strong>topology</strong>, select <strong>student&lt;your number&gt;-demo-app</strong> namespace and click the <strong>Open Url</strong> button.
+To review your <strong>demo-app</strong> login into OpenShift, go to <strong>topology</strong>, select <strong>&lt;student&gt;-demo-app</strong> namespace and click the <strong>Open Url</strong> button.
 </td>
 </tr>
 </table>

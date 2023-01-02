@@ -254,7 +254,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to clone <strong>base-chart</strong> repository (replace &lt;student&gt; with your student id):</p>
+<p>Add a task to clone <strong>base-chart</strong> repository (<mark>replace &lt;student&gt; with your student id</mark>):</p>
 </li>
 </ul>
 </div>
@@ -358,7 +358,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to get the <strong>deployment</strong> that it is running in your test namespace:</p>
+<p>Add a task to get the <strong>deployment</strong> that it is running in your test namespace (<mark>replace &lt;student&gt; with your student id</mark>):</p>
 </li>
 </ul>
 </div>
@@ -406,7 +406,154 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <h2 id="route"><a class="anchor" href="#route"></a>Route</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: Content</p>
+<p>In the scenario1 we&#8217;ve enabled the creatrion of a route with <strong>deploy.route.enabled: true</strong>, so we should validate if a route has been created.</p>
+</div>
+<div class="paragraph">
+<p>To achive that we have different options, we could read the route object and check if exists but we&#8217;re going one step forward and also validate if we can connect to our application through the route.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset3_steps"></a>Steps</p>
+</li>
+<li>
+<p><a id="tabset3_solution"></a>Solution</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset3_steps">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
+</li>
+<li>
+<p>Add a task to get the <strong>route</strong> that should exist in your test namespace.</p>
+</li>
+<li>
+<p>Add a task to send a request to the route, get the url from the route we&#8217;ve get on previous step.</p>
+</li>
+<li>
+<p>Add a task to validate the previous step response code is 200 (set the already defined variable <strong>failed</strong> as true if it is different).</p>
+</li>
+<li>
+<p>Commit your changes.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/collections/kubernetes/core/k8s_module.html">kubernetes.core.k8s</a></strong> to get the route.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/uri_module.html">ansible.builtin.uri</a></strong> to send the request.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Ignore errors while getting the route, the route creation could be disabled in future scenarios&#8230;&#8203;
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_solution">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
+</li>
+<li>
+<p>Add a task to get the <strong>route</strong> that should exist in your test namespace (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Test - Route --&gt; Get route
+  kubernetes.core.k8s_info:
+    api_version: route.openshift.io/v1
+    kind: Route
+    namespace: "&lt;student&gt;-base-chart"
+    label_selectors:
+      - app=scenario1
+  register: scenario_route
+  ignore_errors: true</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a task to send a request to the route, get the url from the route we&#8217;ve get on previous step:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Test - Route --&gt; Send request to the route when route is defined and enabled
+  ansible.builtin.uri:
+    url: "http://{{ scenario_route.resources[0].spec.host }}"
+    method: GET
+    status_code: 200
+    return_content: yes
+  ignore_errors: true
+  register: route_response
+  when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a task to validate the previous step response code is <strong>200</strong> (set the already defined variable <strong>failed</strong> as true if it is different):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Test - Route --&gt; Validate route is working when is defined and enabled
+  ansible.builtin.set_fact:
+    failed: true
+  when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0 and route_response.status != 200</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Commit your changes.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -414,59 +561,158 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <h2 id="size"><a class="anchor" href="#size"></a>Size</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: Content</p>
+<p>To simplify application resources (memory and CPU) the <strong>base-chart</strong> will preconfigure a set of sizes (XS, S, M, L,&#8230;&#8203;) so application teams don&#8217;t have to worry about anything else but to choose one. On the operation teams side, that will allow them to manage and track the resources utlization (a label with the size is included in all chart resources).</p>
+</div>
+<div class="paragraph">
+<p>Currently the <strong>base-chart</strong> only includes the size <strong>S</strong> and that is the one we&#8217;re going to valide in this scenario. In <strong>Gitea</strong> &gt; <strong>base-chart/chart/template/_helpers.tpl</strong> is where the size is implemented:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>        ########################################################################
-        # Deployment Tests
-        ########################################################################
-
-
-
-
-
-        - name: DEPLOY
-          debug:
-            var: scenario_deployment
-
-        - name: Test - Application Size - S or default
-          ansible.builtin.set_fact:
-            failed: true
-          when: (scenario.size is undefined or scenario.size == "S") and not
-                (scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.cpu == "100m" and
-                scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.memory == "256Mi" and
-                scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.cpu == "100m" and
-                scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.memory == "256Mi")
-
-        ########################################################################
-        # Route Tests
-        ########################################################################
-
-        - name: Test - Route --&gt; Get route
-          kubernetes.core.k8s_info:
-            api_version: route.openshift.io/v1
-            kind: Route
-            namespace: "&lt;student&gt;-base-chart"
-            label_selectors:
-              - app=scenario1
-          register: scenario_route
-          ignore_errors: true
-
-        - name: Test - Route --&gt; Send request to the route when route is defined and enabled
-          ansible.builtin.uri:
-            url: "http://{{ scenario_route.resources[0].spec.host }}"
-            method: GET
-            status_code: 200
-            return_content: yes
-          ignore_errors: true
-          register: route_response
-          when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0
-
-        - name: Test - Route --&gt; Validate route is working when is defined and enabled
-          ansible.builtin.set_fact:
-            failed: true
-          when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0 and route_response.status != 200</pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">{{- define "base.resources" -}}
+{{- $size := default "S" .Values.size -}}
+resources:
+{{- if eq $size "S" }}
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+{{- else }}
+  limits:
+    cpu: 100m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+{{- end}}
+{{- end -}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see the expected resources for <strong>S</strong> are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">Property</th>
+<th class="tableblock halign-center valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">request.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">256Mi</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.cpu</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100m</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">limit.memory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">256Mi</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The scenario1 is configured with the size <strong>S</strong> so we have to validate that the installed deployment have the expected configuration for both limit and request.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset4_steps"></a>Steps</p>
+</li>
+<li>
+<p><a id="tabset4_solution"></a>Solution</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset4_steps">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
+</li>
+<li>
+<p>Add a task to validate that the <strong>S</strong> size resources are the same as the installed ones (set the already defined variable <strong>failed</strong> as true if it is different).</p>
+</li>
+<li>
+<p>Commit your changes.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We don&#8217;t need to get the deployment because we already got it in the replicas validation.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Remember that <strong>S</strong> is also the default size.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset4_solution">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Gitea</strong> and open <strong>helm-ansible-pipeline</strong> repository.</p>
+</li>
+<li>
+<p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
+</li>
+<li>
+<p>Add a task to validate that the <strong>S</strong> size resources are the same as the installed ones (set the already defined variable <strong>failed</strong> as true if it is different):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Test - Application Size - S or default
+  ansible.builtin.set_fact:
+    failed: true
+  when: (scenario.size is undefined or scenario.size == "S") and not
+        (scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.cpu == "100m" and
+        scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.memory == "256Mi" and
+        scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.cpu == "100m" and
+        scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.memory == "256Mi")</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Commit your changes.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </div>
