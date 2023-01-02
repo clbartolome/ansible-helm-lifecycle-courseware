@@ -35,7 +35,7 @@ deploy:
       value: "scenario 1 works!"
 ----
 
-NOTE: For testing purposes we're using the image *openshift/hello-openshift* which is an application that exposes a REST endpoint that returns either *Hello OpenShift!* or the value of the environment variable *RESPONSE*. This has nothing to do with our *demo-app*.
+NOTE: For testing purposes we're using the image *openshift/hello-openshift* which is an application that exposes a REST endpoint that returns either *Hello OpenShift!* or the value of the environment variable *RESPONSE*. This has nothing to do with our *demo-app*!
 
 TODO: explain how to manually run the workflow!
 
@@ -51,7 +51,7 @@ Steps::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *00-create-namespace.yml* and edit it.
-* Add a task to create a namespace named *<student>-base-chart* (replace <student> with your student id).
+* Add a task to create a namespace named *<student>-base-chart* (#replace <student> with your student id#).
 * Commit your changes.
 
 TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/kubernetes/core/k8s_module.html[kubernetes.core.k8s]* to create the namespace.
@@ -64,7 +64,7 @@ Solution::
 
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *00-create-namespace.yml* and edit it.
-* Add a task to create a namespace named *<student>-base-chart* (replace <student> with your student id):
+* Add a task to create a namespace named *<student>-base-chart* (#replace <student> with your student id#):
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -110,7 +110,7 @@ Solution::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *01-install-test-scenario.yml* and edit it.
-* Add a task to clone *base-chart* repository (replace <student> with your student id):
+* Add a task to clone *base-chart* repository (#replace <student> with your student id#):
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -122,7 +122,7 @@ Solution::
     version: master
 ----	
 
-* Add a task to install the scenario1. Chart is in */base-chart/chart* and values are in */base-chart/test/scenario1/values.yaml* (replace <student> with your student id):
+* Add a task to install the scenario1. Chart is in */base-chart/chart* and values are in */base-chart/test/scenario1/values.yaml* (#replace <student> with your student id#):
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -166,7 +166,7 @@ Solution::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *03-uninstall-test-scenario.yml* and edit it.
-* Add a task to uninstall the scenario1 (replace <student> with your student id):
+* Add a task to uninstall the scenario1 (#replace <student> with your student id#):
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -195,7 +195,7 @@ Steps::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *04-delete-namespace.yml* and edit it.
-* Add a task to delete the namespace named *<student>-base-chart* (replace <student> with your student id).
+* Add a task to delete the namespace named *<student>-base-chart* (#replace <student> with your student id#).
 * Commit your changes.
 
 TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/kubernetes/core/k8s_module.html[kubernetes.core.k8s]* to create the namespace.
@@ -207,7 +207,7 @@ Solution::
 
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *04-delete-namespace.yml* and edit it.
-* Add a task to delete the namespace named *<student>-base-chart* (replace <student> with your student id):
+* Add a task to delete the namespace named *<student>-base-chart* (#replace <student> with your student id#):
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	

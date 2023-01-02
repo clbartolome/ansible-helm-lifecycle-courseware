@@ -50,7 +50,7 @@ TODO change image
 [#chart]
 == Update Chart Repository
 
-Now it is time to trigger our *AAP Workflow*. To do so we're going to make a change in our *base-chart* repository, that change will automatically trigger the pipeline.
+Now it is time to trigger our *AAP Workflow*. To do so we're going to make a change in our *base-chart* repository and that change will automatically trigger the pipeline.
 
 * Login into *Gitea* and open *base-chart* repository.
 * Open the file *chart/Chart.yaml*.
@@ -79,10 +79,10 @@ image::2-first-nx-chart.png[]
 [#app]
 == Update Application
 
-Currently your *demo-app* deployment in *ArgoCD* is pointing to an initial version  *base-chart-0.0.1*. In order to update it and use the new version that we've just created, we need to update the deployment files in *ArgoCD*.
+Currently your *demo-app* deployment in *ArgoCD* is pointing to an initial version named *base-chart-0.0.1*. In order to update it and use the new version that we've just created, we need to update the deployment files in *ArgoCD*.
 
 * Login into *Gitea* and open *demo-app* repository.
-* Open the file *deploy/Chart.yaml* and update the chart reference (replace <student> with your student id):
+* Open the file *deploy/Chart.yaml* and update the chart reference (#replace <student> with your student id#):
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -101,7 +101,7 @@ dependencies:
 
 * Commit your changes.
 
-* Login into *ArgoCD* and open your *demo-app* application. *ArgoCD* automatically sync each 3 minutes. To manually force *ArgoCD* synchronization press *SYNC* (use the default synchronization values). Now you should see your changes applied in the section *LAST SYNC RESULT*.
+* Login into *ArgoCD* and open your *demo-app* application. *ArgoCD* automatically syncs each 3 minutes but we can manually force *ArgoCD* synchronization by pressing the *SYNC* button (use the default synchronization values). Now you should see your changes applied in the section *LAST SYNC RESULT*.
 
 image::2-first-argo.png[]
 
@@ -114,7 +114,7 @@ image::2-first-ocp-ov.png[]
 
 image::2-first-demo-app.png[]
 
-* Click on *demo-app-xxx* pod link to review pod details and validate the pod have a label *2-first-ocp-ov.png*:
+* Click on *demo-app-xxx* pod link to review pod details and validate the pod have a label *helm.sh/chart:base-chart-1.0.0*:
 
 image::2-first-pod-labels.png[]
 

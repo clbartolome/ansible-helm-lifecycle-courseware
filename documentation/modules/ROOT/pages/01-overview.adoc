@@ -6,15 +6,15 @@ IMPORTANT: Access links and credentials for all this components should be provid
 [#gitea]
 == Gitea
 
-Gitea is a web-based collaborative software platform for hosting software development version control using Git as well as other collaborative features like bug tracking, code review, kanban boards, tickets, and wikis. 
+Gitea is a web-based collaborative software platform for hosting software development version control using Git, as well as other collaborative features like bug tracking, code review, kanban boards, tickets, and wikis. 
 
 This laboratory includes three repositories:
 
-* *helm-ansible-pipeline*: contains the templates that form the *base-chart* pipeline (workflow) in AAP.
-* *base-chart*: Helm Chart used in this laboratory.
+* *base-chart*: Helm Chart used in this laboratory to deploy applications and whose lifecycle we are going to work on.
+* *helm-ansible-pipeline*: contains the templates that form the *base-chart* pipeline (workflow) in Ansible Automation Platform.
 * *demo-app*: web application to demonstrate the deployment of an application using the chart. Shows the versions of the application and the Helm chart used for its deployment.
 
-NOTE: During the laboratory you will have to make changes to this repositories. Laboratory instructions asume you are using Gitea web, but you can clone this 3 repositories if you feel more comfortable doing and pushing changes in your laptop. 
+NOTE: During the laboratory you will have to make changes to this repositories. Laboratory instructions asume you are using Gitea web site, but you can clone these 3 repositories if you feel more comfortable doing and pushing changes in your laptop. 
 
 [#aap]
 == Ansible Automation Platform
@@ -24,13 +24,13 @@ TODO: content
 [#ocp]
 == OpenShift
 
-OpenShift is Red Hat's enterprise-ready Kubernetes platform. OpenShift is hosting all the applications used in this laboratory (AAP, Gitea, ArgoCD, Nexus, ...).
+OpenShift is Red Hat's enterprise-ready Kubernetes platform. OpenShift is hosting all the components used in this laboratory (AAP, Gitea, ArgoCD, Nexus, ...).
 
-As a laboratory student, you have an already created namespace named *student<your number>-demo-app* that contains an application used for testing the *base-chart*. The application looks like this:
+As a laboratory student, you have an already created namespace named *<student>-demo-app* that contains an application used for testing the *base-chart*. The application looks like this:
 
 image::1-overview-demoapp.png[]
 
-TIP: To review your *demo-app* login into OpenShift, go to *topology*, select *student<your number>-demo-app* namespace and click the *Open Url* button.
+TIP: To review your *demo-app* login into OpenShift, go to *topology*, select *<student>-demo-app* namespace and click the *Open Url* button.
 
 image::1-overview-openurl.png[]
 

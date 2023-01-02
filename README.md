@@ -2,6 +2,8 @@
 
 Created from Red Hat Scholars [template](https://github.com/clbartolome/guide-template).
 
+Guide [link](https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/index.html)
+
 ## Run locally
 
 Install dependencies:
