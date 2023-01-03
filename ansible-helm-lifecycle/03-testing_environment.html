@@ -229,9 +229,45 @@ For testing purposes we&#8217;re using the image <strong>openshift/hello-openshi
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>TODO: explain how to manually run the workflow!</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="run-manually"><a class="anchor" href="#run-manually"></a>Run Workflow Manually</h3>
+<div class="paragraph">
+<p>Before start working on our pipeline, let&#8217;s take a look at how to manually trigger the Workflow or pipeline in Ansible Automation Platform so we can test that everything we&#8217;re doing is working as expected:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open <strong>Ansible Automation Platform</strong></p>
+</li>
+<li>
+<p>Go to: <strong>Resources</strong> &gt; <strong>Templates</strong> &gt; <strong>[WF] Base Chart Pipeline</strong></p>
+</li>
+<li>
+<p>Click on <strong>Launch</strong></p>
+</li>
+<li>
+<p>You will be automatically redirected to a view of the execution flow:</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/3-wf-view.png" alt="3 wf view">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you have not implemented the <strong>Delete Namespace</strong> task or your test failed before deleting it, remember to manually remove the namespace. Go to <strong>OpenShift</strong> &gt; <strong>Project</strong> &gt; select the testing namespace &gt; <strong>Actions</strong> (top right corner) &gt; <strong>Delete Project</strong>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -281,6 +317,18 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 </tr>
 </table>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Use the object <strong>Project</strong> with api_version <strong>project.openshift.io/v1</strong> to create the namespace.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_solution">
 <div class="ulist">
@@ -301,8 +349,8 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Create Base Chart test namespace
   kubernetes.core.k8s:
     definition:
-      apiVersion: v1
-      kind: Namespace
+      apiVersion: project.openshift.io/v1
+      kind: Project
       metadata:
         name: "&lt;student&gt;-base-chart"
     state: present</code></pre>
@@ -413,7 +461,7 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Clone Base Chart remote repository
   ansible.builtin.git:
-    repo: <a href="http://gitea.app-lifecycle-demo.svc:3000/&lt;student&gt;/base-chart.git" class="bare">http://gitea.app-lifecycle-demo.svc:3000/&lt;student&gt;/base-chart.git</a>
+    repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/&lt;student&gt;/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/&lt;student&gt;/base-chart.git</a>
     dest: /tmp/base-chart
     version: master</code></pre>
 </div>
@@ -614,8 +662,8 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Delete Base Chart test namespace
   kubernetes.core.k8s:
     definition:
-      apiVersion: v1
-      kind: Namespace
+      apiVersion: project.openshift.io/v1
+      kind: Project
       metadata:
         name: "&lt;student&gt;-base-chart"
     state: absent</code></pre>

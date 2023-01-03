@@ -199,10 +199,10 @@ During this laboratory exercises you will see <strong>&lt;student&gt;</strong> i
 <h2 id="webhook"><a class="anchor" href="#webhook"></a>Configure Webhook</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We have created a Helm Chart named <strong>base-chart</strong> that will help Operation Teams with cluster management. In order to make upgrades or fix issues in our <strong>base-chart</strong> we are going to create a pipeline that manages the Helm Chart lifecycle.</p>
+<p>We have created a Helm Chart named <strong>base-chart</strong> that will help Operation Teams with cluster management and also will help Application Teams with application deployments. In order to make upgrades or fix issues in our <strong>base-chart</strong> we are going to create a pipeline that manages the Helm Chart lifecycle.</p>
 </div>
 <div class="paragraph">
-<p>The first step is creating a webhook in our <strong>AAP Workflow</strong> (pipeline) and configure it in <strong>Gitea base-chart</strong> repository, so we can trigger it when new features or fixes are commited in our repository.</p>
+<p>The first step is creating a webhook in our <strong>AAP Workflow</strong> (pipeline) and configure it in <strong>Gitea base-chart</strong> repository so we can trigger it when new features or fixes are commited in our repository.</p>
 </div>
 <div class="sect2">
 <h3 id="_create_webhook"><a class="anchor" href="#_create_webhook"></a>Create Webhook</h3>
@@ -306,9 +306,6 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <img src="_images/2-first-nexus-playbook.png" alt="2 first nexus playbook">
 </div>
 </div>
-<div class="paragraph">
-<p>TODO change image</p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -392,9 +389,22 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <p>Login into <strong>Gitea</strong> and open <strong>demo-app</strong> repository.</p>
 </li>
 <li>
-<p>Open the file <strong>deploy/Chart.yaml</strong> and update the chart reference (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Open the file <strong>deploy/Chart.yaml</strong> and update:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Repository: change <strong>/helm</strong> with your student id.</p>
+</li>
+<li>
+<p>Version: update to <strong>1.0.0</strong>.</p>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example (<mark>replace &lt;student&gt; with your student id</mark>):</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -451,6 +461,18 @@ dependencies:
 <div class="content">
 <img src="_images/2-first-demo-app.png" alt="2 first demo app">
 </div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+your web browser could be caching previous version. Use <strong>Ctrl + F5</strong> or <strong>Cmd-Shift-R</strong> on MacOS to refresh your cache.
+</td>
+</tr>
+</table>
 </div>
 <div class="ulist">
 <ul>
