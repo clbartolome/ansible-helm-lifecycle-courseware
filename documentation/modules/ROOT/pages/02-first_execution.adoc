@@ -6,9 +6,9 @@ IMPORTANT: During this laboratory exercises you will see *<student>* in some fil
 [#webhook]
 == Configure Webhook
 
-We have created a Helm Chart named *base-chart* that will help Operation Teams with cluster management. In order to make upgrades or fix issues in our *base-chart* we are going to create a pipeline that manages the Helm Chart lifecycle.
+We have created a Helm Chart named *base-chart* that will help Operation Teams with cluster management and also will help Application Teams with application deployments. In order to make upgrades or fix issues in our *base-chart* we are going to create a pipeline that manages the Helm Chart lifecycle.
 
-The first step is creating a webhook in our *AAP Workflow* (pipeline) and configure it in *Gitea base-chart* repository, so we can trigger it when new features or fixes are commited in our repository.
+The first step is creating a webhook in our *AAP Workflow* (pipeline) and configure it in *Gitea base-chart* repository so we can trigger it when new features or fixes are commited in our repository.
 
 === Create Webhook
 
@@ -45,7 +45,6 @@ Nexus is going to be the repository where we're going to upload our packaged *ba
 * Click *Commit Changes*.
 
 image::2-first-nexus-playbook.png[]
-TODO change image
 
 [#chart]
 == Update Chart Repository
@@ -82,7 +81,11 @@ image::2-first-nx-chart.png[]
 Currently your *demo-app* deployment in *ArgoCD* is pointing to an initial version named *base-chart-0.0.1*. In order to update it and use the new version that we've just created, we need to update the deployment files in *ArgoCD*.
 
 * Login into *Gitea* and open *demo-app* repository.
-* Open the file *deploy/Chart.yaml* and update the chart reference (#replace <student> with your student id#):
+* Open the file *deploy/Chart.yaml* and update:
+** Repository: change */helm* with your student id.
+** Version: update to *1.0.0*. 
+
+Example (#replace <student> with your student id#):
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -113,6 +116,8 @@ image::2-first-ocp-ov.png[]
 * Use the *URL* button to open your application, the chart version should be *base-chart-1.0.0*:
 
 image::2-first-demo-app.png[]
+
+CAUTION: your web browser could be caching previous version. Use *Ctrl + F5* or *Cmd-Shift-R* on MacOS to refresh your cache.
 
 * Click on *demo-app-xxx* pod link to review pod details and validate the pod have a label *helm.sh/chart:base-chart-1.0.0*:
 

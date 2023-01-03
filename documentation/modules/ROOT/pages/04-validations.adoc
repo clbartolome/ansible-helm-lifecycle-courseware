@@ -2,6 +2,8 @@
 
 Now that the namespace has been created and the test *base-chart* has been installed, we can start performing some tests to be sure the *base-chart* is working as expected.
 
+IMPORTANT: Take a look at xref:03-testing_environment.adoc#run-manually[*Run Workflow Manually*] section to review how to test the Workflow manually.
+
 The first thing that we should do is create a task to download the *base-chart* code and read the scenario1 values so we can perform some validations.
 
 [tabs, subs="attributes+,+macros"]	
@@ -32,7 +34,7 @@ Solution::
 ----	
 - name: Clone Base Chart remote repository
   ansible.builtin.git:
-    repo: http://gitea.app-lifecycle-demo.svc:3000/<student>/base-chart.git
+    repo: http://gitea.app-lifecycle-lab.svc:3000/<student>/base-chart.git
     dest: /tmp/base-chart
     version: master
 ----	
@@ -88,7 +90,7 @@ Solution::
     kind: Deployment
     namespace: "<student>-base-chart"
     label_selectors:
-      - app={{ helm_test_scenario }}
+      - app=scenario1
   ignore_errors: true
   register: scenario_deployment
 ----	

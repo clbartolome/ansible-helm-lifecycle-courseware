@@ -36,8 +36,19 @@ deploy:
 ----
 
 NOTE: For testing purposes we're using the image *openshift/hello-openshift* which is an application that exposes a REST endpoint that returns either *Hello OpenShift!* or the value of the environment variable *RESPONSE*. This has nothing to do with our *demo-app*!
+ 
+[#run-manually]
+=== Run Workflow Manually
+Before start working on our pipeline, let's take a look at how to manually trigger the Workflow or pipeline in Ansible Automation Platform so we can test that everything we're doing is working as expected:
 
-TODO: explain how to manually run the workflow!
+. Open *Ansible Automation Platform*
+. Go to: *Resources* > *Templates* > *[WF] Base Chart Pipeline*
+. Click on *Launch*
+. You will be automatically redirected to a view of the execution flow:
+
+image::3-wf-view.png[]
+
+IMPORTANT: If you have not implemented the *Delete Namespace* task or your test failed before deleting it, remember to manually remove the namespace. Go to *OpenShift* > *Project* > select the testing namespace > *Actions* (top right corner) > *Delete Project*.
 
 [#create-ns]
 == Create Namespace
@@ -56,6 +67,8 @@ Steps::
 
 TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/kubernetes/core/k8s_module.html[kubernetes.core.k8s]* to create the namespace.
 
+CAUTION: Use the object *Project* with api_version *project.openshift.io/v1* to create the namespace.
+
 --	
 Solution::	
 +	
@@ -72,8 +85,8 @@ Solution::
 - name: Create Base Chart test namespace
   kubernetes.core.k8s:
     definition:
-      apiVersion: v1
-      kind: Namespace
+      apiVersion: project.openshift.io/v1
+      kind: Project
       metadata:
         name: "<student>-base-chart"
     state: present	
@@ -117,7 +130,7 @@ Solution::
 ----	
 - name: Clone Base Chart remote repository
   ansible.builtin.git:
-    repo: http://gitea.app-lifecycle-demo.svc:3000/<student>/base-chart.git
+    repo: http://gitea.app-lifecycle-lab.svc:3000/<student>/base-chart.git
     dest: /tmp/base-chart
     version: master
 ----	
@@ -215,8 +228,8 @@ Solution::
 - name: Delete Base Chart test namespace
   kubernetes.core.k8s:
     definition:
-      apiVersion: v1
-      kind: Namespace
+      apiVersion: project.openshift.io/v1
+      kind: Project
       metadata:
         name: "<student>-base-chart"
     state: absent
