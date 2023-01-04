@@ -184,14 +184,14 @@
 <h1 class="page">First Execution</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock important">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-During this laboratory exercises you will see <strong>&lt;student&gt;</strong> in some files and URLs, remember to update it with your assigned <strong>student id</strong>.
+Visit <a href="user-configuration.html" class="xref page"><strong>User Configuration section</strong></a> to configure your username if you haven&#8217;t set it up yet!
 </td>
 </tr>
 </table>
@@ -297,17 +297,56 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <p>Open the playbook <strong>05-helm-package-nexus.yml</strong>.</p>
 </li>
 <li>
-<p>Replace all <strong>&lt;student&gt;</strong> ocurrences with your student id.</p>
+<p>Add the following content:</p>
 </li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Helm Package
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Helm Package
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
+        dest: /tmp/base-chart
+        version: master
+
+    - name: Package Helm test scenario
+      ansible.builtin.shell: helm package chart
+      args:
+        chdir: /tmp/base-chart
+
+    - name: Load Chart information
+      ansible.builtin.include_vars:
+        file: /tmp/base-chart/chart/Chart.yaml
+
+    - name: Upload Helm Base Chart package to Nexus
+      ansible.builtin.shell: |
+        curl -X 'POST' \
+        'http://%USER%:%<a href="mailto:USER%@nexus.app-lifecycle-lab.svc">USER%@nexus.app-lifecycle-lab.svc</a>:8081/service/rest/v1/components?repository=%USER%' \
+        -H 'accept: application/json' \
+        -H 'Content-Type: multipart/form-data' \
+        -F 'helm.asset=@base-chart-{{ version }}.tgz;type=application/gzip'
+      args:
+        chdir: /tmp/base-chart
+
+    # TODO:  "Populate New Base Chart version {{ version }}"</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Click <strong>Commit Changes</strong>.</p>
 </li>
 </ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/2-first-nexus-playbook.png" alt="2 first nexus playbook">
-</div>
 </div>
 </div>
 </div>
@@ -328,15 +367,19 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <li>
 <p>Modify <strong>version</strong> to <strong>1.0.0</strong>.</p>
 </li>
-<li>
-<p>Click <strong>Commit Changes</strong>.</p>
-</li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/2-first-basechart.png" alt="2 first basechart">
 </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <strong>Commit Changes</strong>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -371,7 +414,7 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 </div>
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s login into <strong>Nexus</strong> &gt; <strong>Browse</strong> &gt; <strong>&lt;student&gt;</strong> to validate that the new version of your <strong>base-chart</strong> has been uploaded.</p>
+<p>Now let&#8217;s login into <strong>Nexus</strong> &gt; <strong>Browse</strong> &gt; <strong>%USER%</strong> to validate that the new version of your <strong>base-chart</strong> has been uploaded.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -399,15 +442,12 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <p>Repository: change <strong>/helm</strong> with your student id.</p>
 </li>
 <li>
-<p>Version: update to <strong>1.0.0</strong>.</p>
+<p>Version: update to <strong>1.0.0</strong>:</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Example (<mark>replace &lt;student&gt; with your student id</mark>):</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -419,7 +459,7 @@ version: 1.0
 appVersion: "1.0.0"
 dependencies:
 - name: base-chart
-  repository: <a href="http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/&lt;student&gt;/" class="bare">http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/&lt;student&gt;/</a>
+  repository: <a href="http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/%USER%/" class="bare">http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/%USER%/</a>
   version: 1.0.0</code></pre>
 </div>
 </div>
@@ -441,7 +481,7 @@ dependencies:
 <div class="ulist">
 <ul>
 <li>
-<p>Login into OpenShift and go to <strong>Topology</strong> and select your <strong>&lt;student&gt;-demo-app</strong> namespace.</p>
+<p>Login into OpenShift and go to <strong>Topology</strong> and select your <strong>%USER%-demo-app</strong> namespace.</p>
 </li>
 <li>
 <p>Open your <strong>deployment</strong> clicking on the <strong>NGINX</strong> icon:</p>
@@ -480,7 +520,7 @@ Review the other labels added by the <strong>base-chart</strong> to help on clus
 <div class="ulist">
 <ul>
 <li>
-<p>Use the <strong>URL</strong> button to open your application, the chart version should be <strong>base-chart-1.0.0</strong>:</p>
+<p>Use the <strong>URL</strong> button in OpenShift topology view to open your application, the chart version should be <strong>base-chart-1.0.0</strong>:</p>
 </li>
 </ul>
 </div>

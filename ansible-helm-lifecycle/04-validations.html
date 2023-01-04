@@ -187,20 +187,32 @@
 <div class="paragraph">
 <p>Now that the namespace has been created and the test <strong>base-chart</strong> has been installed, we can start performing some tests to be sure the <strong>base-chart</strong> is working as expected.</p>
 </div>
-<div class="admonitionblock important">
+<div class="paragraph">
+<p>The first thing that we should do is create a task to download the <strong>base-chart</strong> code and read the scenario1 values so we can perform some validations.</p>
+</div>
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Visit <a href="user-configuration.html" class="xref page"><strong>User Configuration section</strong></a> to configure your username if you haven&#8217;t set it up yet!
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 Take a look at <a href="03-testing_environment.html#run-manually" class="xref page"><strong>Run Workflow Manually</strong></a> section to review how to test the Workflow manually.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>The first thing that we should do is create a task to download the <strong>base-chart</strong> code and read the scenario1 values so we can perform some validations.</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -269,7 +281,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to clone <strong>base-chart</strong> repository (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Add a task to clone <strong>base-chart</strong> repository :</p>
 </li>
 </ul>
 </div>
@@ -277,7 +289,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Clone Base Chart remote repository
   ansible.builtin.git:
-    repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/&lt;student&gt;/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/&lt;student&gt;/base-chart.git</a>
+    repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
     dest: /tmp/base-chart
     version: master</code></pre>
 </div>
@@ -373,7 +385,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to get the <strong>deployment</strong> that it is running in your test namespace (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Add a task to get the <strong>deployment</strong> that it is running in your test namespace :</p>
 </li>
 </ul>
 </div>
@@ -383,7 +395,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
   kubernetes.core.k8s_info:
     api_version: apps/v1
     kind: Deployment
-    namespace: "&lt;student&gt;-base-chart"
+    namespace: "%USER%-base-chart"
     label_selectors:
       - app=scenario1
   ignore_errors: true
@@ -508,7 +520,7 @@ Ignore errors while getting the route, the route creation could be disabled in f
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to get the <strong>route</strong> that should exist in your test namespace (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Add a task to get the <strong>route</strong> that should exist in your test namespace :</p>
 </li>
 </ul>
 </div>
@@ -518,7 +530,7 @@ Ignore errors while getting the route, the route creation could be disabled in f
   kubernetes.core.k8s_info:
     api_version: route.openshift.io/v1
     kind: Route
-    namespace: "&lt;student&gt;-base-chart"
+    namespace: "%USER%-base-chart"
     label_selectors:
       - app=scenario1
   register: scenario_route

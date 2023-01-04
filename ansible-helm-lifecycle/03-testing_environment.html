@@ -184,6 +184,18 @@
 <h1 class="page">Testing Environment</h1>
 <div id="preamble">
 <div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Visit <a href="user-configuration.html" class="xref page"><strong>User Configuration section</strong></a> to configure your username if you haven&#8217;t set it up yet!
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>In order to execute some validations on our <strong>base-chart</strong> we need to create an ephemeral namespace in OpenShift (will be deleted after testing) and deploy (or install as it is known in Helm) a testing application.</p>
 </div>
@@ -301,7 +313,7 @@ If you have not implemented the <strong>Delete Namespace</strong> task or your t
 <p>Open the playbook <strong>00-create-namespace.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to create a namespace named <strong>&lt;student&gt;-base-chart</strong> (<mark>replace &lt;student&gt; with your student id</mark>).</p>
+<p>Add a task to create a namespace named <strong>%USER%-base-chart</strong> .</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -343,7 +355,7 @@ Use the object <strong>Project</strong> with api_version <strong>project.openshi
 <p>Open the playbook <strong>00-create-namespace.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to create a namespace named <strong>&lt;student&gt;-base-chart</strong> (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Add a task to create a namespace named <strong>%USER%-base-chart</strong> :</p>
 </li>
 </ul>
 </div>
@@ -355,7 +367,7 @@ Use the object <strong>Project</strong> with api_version <strong>project.openshi
       apiVersion: project.openshift.io/v1
       kind: Project
       metadata:
-        name: "&lt;student&gt;-base-chart"
+        name: "%USER%-base-chart"
     state: present</code></pre>
 </div>
 </div>
@@ -456,7 +468,7 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
 <p>Open the playbook <strong>01-install-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to clone <strong>base-chart</strong> repository (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Add a task to clone <strong>base-chart</strong> repository :</p>
 </li>
 </ul>
 </div>
@@ -464,7 +476,7 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Clone Base Chart remote repository
   ansible.builtin.git:
-    repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/&lt;student&gt;/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/&lt;student&gt;/base-chart.git</a>
+    repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
     dest: /tmp/base-chart
     version: master</code></pre>
 </div>
@@ -472,7 +484,7 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
 <div class="ulist">
 <ul>
 <li>
-<p>Add a task to install the scenario1. Chart is in <strong>/base-chart/chart</strong> and values are in <strong>/base-chart/test/scenario1/values.yaml</strong> (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Add a task to install the scenario1. Chart is in <strong>/base-chart/chart</strong> and values are in <strong>/base-chart/test/scenario1/values.yaml</strong> :</p>
 </li>
 </ul>
 </div>
@@ -482,7 +494,7 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
   kubernetes.core.helm:
     name: "scenario1"
     chart_ref: "/tmp/base-chart/chart"
-    release_namespace: "&lt;student&gt;-base-chart"
+    release_namespace: "%USER%-base-chart"
     wait: yes
     values_files:
       - "/tmp/base-chart/test/scenario1/values.yaml"
@@ -571,7 +583,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>03-uninstall-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to uninstall the scenario1 (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Add a task to uninstall the scenario1 :</p>
 </li>
 </ul>
 </div>
@@ -581,7 +593,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
   kubernetes.core.helm:
     name: "scenario1"
     chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
-    release_namespace: "&lt;student&gt;-base-chart"
+    release_namespace: "%USER%-base-chart"
     state: absent
     wait: yes</code></pre>
 </div>
@@ -626,7 +638,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>04-delete-namespace.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to delete the namespace named <strong>&lt;student&gt;-base-chart</strong> (<mark>replace &lt;student&gt; with your student id</mark>).</p>
+<p>Add a task to delete the namespace named <strong>%USER%-base-chart</strong> .</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -656,7 +668,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>04-delete-namespace.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to delete the namespace named <strong>&lt;student&gt;-base-chart</strong> (<mark>replace &lt;student&gt; with your student id</mark>):</p>
+<p>Add a task to delete the namespace named <strong>%USER%-base-chart</strong> :</p>
 </li>
 </ul>
 </div>
@@ -668,7 +680,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
       apiVersion: project.openshift.io/v1
       kind: Project
       metadata:
-        name: "&lt;student&gt;-base-chart"
+        name: "%USER%-base-chart"
     state: absent</code></pre>
 </div>
 </div>
