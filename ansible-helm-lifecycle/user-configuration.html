@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Notifications :: Ansible Helm Lifecycle Guide</title>
-    <link rel="canonical" href="https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/05-notification.html">
-    <link rel="prev" href="04-validations.html">
-    <link rel="next" href="06-challenges.html">
+    <title>User Configuration :: Ansible Helm Lifecycle Guide</title>
+    <link rel="canonical" href="https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/user-configuration.html">
+    <link rel="prev" href="index.html">
+    <link rel="next" href="01-overview.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -54,7 +54,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="index.html">Welcome</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="user-configuration.html">User Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -132,15 +132,15 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="05-notification.html">5. Notifications</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#config">User Configuration</a>
+    <a class="nav-link" href="05-notification.html#config">User Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#task">Task</a>
+    <a class="nav-link" href="05-notification.html#task">Task</a>
   </li>
 </ul>
   </li>
@@ -174,59 +174,124 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Ansible Helm Lifecycle Guide</a></li>
-    <li><a href="05-notification.html">5. Notifications</a></li>
+    <li><a href="user-configuration.html">User Configuration</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/clbartolome/ansible-helm-lifecycle-guide/edit/master/documentation/modules/ROOT/pages/05-notification.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/clbartolome/ansible-helm-lifecycle-guide/edit/master/documentation/modules/ROOT/pages/user-configuration.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Notifications</h1>
-<div class="sect1">
-<h2 id="config"><a class="anchor" href="#config"></a>User Configuration</h2>
+<h1 class="page">User Configuration</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: Content</p>
+<p>During this laboratory exercises you will see %USER% in some files and URLs and you will have to replace it with your <strong>student id</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In order to make your work easy, you can add <strong>?STUDENT=studentid</strong> to this lab URL and your student id will be automatically updated in all this lab exercices.</p>
+</div>
+<div class="paragraph">
+<p>For example if you are <strong>student12</strong> have to add: ? remember to update it with your assigned student id.</p>
+</div>
+<div class="paragraph">
+<p>%STUDENT%</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="task"><a class="anchor" href="#task"></a>Task</h2>
+<h2>Instructions</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>TODO: Content</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p>name: "Populate New Base Chart version {{ version }}"
-ansible.builtin.set_stats:
-  data:
-    new_version: "{{ version }}"</p>
+<p>Managing applications deployments.</p>
 </li>
 <li>
-<p>name: Send New Base Chart version Slack notification
-community.general.slack:
-  token: "{{ lookup('env','SLACK_TOKEN') }}"
-  msg: |
-      <mark># Base Chart Pipeline </mark>#
-      --------------------------------------
-      <code>Status</code>: Success.
-      <code>New Base Chart Version</code>: {{ new_version }}
-      --------------------------------------
-  channel: "{{ lookup('env','SLACK_CHANNEL') }}"
-  color: good
-  username: "&lt;student&gt;"
-  link_names: 0
-  parse: 'none'</p>
+<p>Control resources.</p>
+</li>
+<li>
+<p>Security and policies.</p>
+</li>
+<li>
+<p>Cluster housekeeping.</p>
+</li>
+<li>
+<p>Environments and cloud services management.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The laboratory focus in the lifecycle of the <strong>base-chart</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/welcome.png" alt="welcome">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Operations team make a change in <strong>base-chart</strong> repository (ex: new feature).</p>
+</li>
+<li>
+<p>Previous change triggers a workflow in Ansible Automation Platform.</p>
+</li>
+<li>
+<p>The workflow execute a set of job templates to:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Setup testing environment in OpenShift.</p>
+</li>
+<li>
+<p>Deploy a testing application using the <strong>base-chart</strong>.</p>
+</li>
+<li>
+<p>Validate a scenario.</p>
+</li>
+<li>
+<p>Clean up environment in OpenShift.</p>
+</li>
+<li>
+<p>Package and upload the <strong>base-chart</strong> new version to Nexus.</p>
+</li>
+<li>
+<p>Send a notification with the new version if everything works as expected.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Development teams will update the version of the chart in their application resources (repositories that ArgoCD is using to deploy applications).</p>
+</li>
+<li>
+<p>ArgoCD will automatically perform the deployment into OpenShift using the new chart.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The lab is divided into two blocks of sections. The first one, from section 1 to 5 is a set of guided exercises that will allow you to familiarize yourself with the environment and create the foundation of the Helm Chart lifecycle .</p>
+</div>
+<div class="paragraph">
+<p>The last one is a section called <strong>Challenges</strong>, a set of exercises with no guide that will allow you to face more real scenarios in your own way.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you have any questions or concerns please let us know, <strong>we&#8217;re more than happy to help!!</strong>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="04-validations.html">4. Validations</a></span>
-  <span class="next"><a href="06-challenges.html">6. Challenges</a></span>
+  <span class="prev"><a href="index.html">Welcome</a></span>
+  <span class="next"><a href="01-overview.html">1. Overview</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
