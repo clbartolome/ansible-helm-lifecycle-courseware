@@ -113,17 +113,17 @@ image::2-first-argo.png[]
 
 image::2-first-ocp-ov.png[]
 
-* Use the *URL* button to open your application, the chart version should be *base-chart-1.0.0*:
-
-image::2-first-demo-app.png[]
-
-CAUTION: your web browser could be caching previous version. Use *Ctrl + F5* or *Cmd-Shift-R* on MacOS to refresh your cache.
-
 * Click on *demo-app-xxx* pod link to review pod details and validate the pod have a label *helm.sh/chart:base-chart-1.0.0*:
 
 image::2-first-pod-labels.png[]
 
 NOTE: Review the other labels added by the *base-chart* to help on cluster housekeeping tasks.
+
+* Use the *URL* button to open your application, the chart version should be *base-chart-1.0.0*:
+
+image::2-first-demo-app.png[]
+
+CAUTION: your web browser could be caching previous version. Use *Ctrl + F5* or *Cmd-Shift-R* on MacOS to refresh your cache.
 
 
 

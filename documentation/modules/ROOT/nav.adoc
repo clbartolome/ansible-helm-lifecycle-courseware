@@ -1,4 +1,5 @@
 * xref:index.adoc[Welcome]
+* xref:user-configuration.adoc[User Configuration]
 * xref:01-overview.adoc[1. Overview]
 ** xref:01-overview.adoc#gitea[Gitea]
 ** xref:01-overview.adoc#aap[Ansible Automation Platform]

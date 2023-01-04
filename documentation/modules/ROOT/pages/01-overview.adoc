@@ -74,7 +74,7 @@ appVersion: "1.0.0"
 dependencies:
 - name: base-chart
   repository: http://nexus.[cluster-api]/repository/helm/
-  version: 1.0.0
+  version: 0.0.1
 ----
 
 * *deploy/values.yaml*: contains the values applied to the Helm Chart to deploy the application. 
