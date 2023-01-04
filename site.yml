@@ -2,29 +2,36 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: OpenShift Starter Guides
-  url: http://redhat-scholars.github.io/openshift-starter-guides/
-  start_page: rhs-openshift-starter-guides::index.adoc
+  title: Ansible Helm Lifecycle Guide
+  url: https://clbartolome.github.io/ansible-helm-lifecycle-guide
+  start_page: ansible-helm-lifecycle::index.adoc
 
 content:
   sources:
-    - url: git@github.com:redhat-scholars/openshift-starter-guides.git
+    # - url: ./
+    #   start_path: documentation
+    - url: git@github.com:clbartolome/ansible-helm-lifecycle-guide.git
       tags: []
-      branches: [ocp-4.7, ocp-4.8, ocp-4.9]
+      branches: [master]
       start_path: documentation
 
 asciidoc:
   attributes:
-    project-namespace: workshop
+    release-version: master
+    page-pagination: true
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js
 
 ui:
   bundle:
-    url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.8/ui-bundle.zip
+    url: https://github.com/redhat-developer-demos/rhd-tutorial-ui/releases/download/v0.1.9/ui-bundle.zip
     snapshot: true
-  supplemental_files: ./supplemental-ui
+  supplemental_files:
+    - path: ./supplemental-ui
+    - path: .nojekyll
+    - path: ui.yml
+      contents: "static_files: [ .nojekyll ]"
 
 output:
   dir: ./gh-pages

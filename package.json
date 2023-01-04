@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/redhat-scholars/openshift-admins-devops.git"
+    "url": "git+https://github.com/clbartolome/openshift-admins-devops.git"
   },
   "license": "Apache-2.0",
   "babel": {
