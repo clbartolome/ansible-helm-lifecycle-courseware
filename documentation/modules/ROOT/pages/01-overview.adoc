@@ -26,11 +26,11 @@ TODO: content
 
 OpenShift is Red Hat's enterprise-ready Kubernetes platform. OpenShift is hosting all the components used in this laboratory (AAP, Gitea, ArgoCD, Nexus, ...).
 
-As a laboratory student, you have an already created namespace named *<student>-demo-app* that contains an application used for testing the *base-chart*. The application looks like this:
+As a laboratory student, you have an already created namespace named *%USER%-demo-app* that contains an application used for testing the *base-chart*. The application looks like this:
 
 image::1-overview-demoapp.png[]
 
-TIP: To review your *demo-app* login into OpenShift, go to *topology*, select *<student>-demo-app* namespace and click the *Open Url* button.
+TIP: To review your *demo-app* login into OpenShift, go to *topology*, select *%USER%-demo-app* namespace and click the *Open Url* button.
 
 image::1-overview-openurl.png[]
 

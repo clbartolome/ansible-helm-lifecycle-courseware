@@ -30,6 +30,6 @@ TODO: Content
             --------------------------------------
         channel: "{{ lookup('env','SLACK_CHANNEL') }}"
         color: good
-        username: "<student>"
+        username: "%USER%"
         link_names: 0
         parse: 'none'

@@ -1,6 +1,6 @@
 = Challenges 
 
-First of all, *CONGRATULATIONS* for getting to this point of the Lab!! 
+First of all, *CONGRATULATIONS %USER%* for getting to this point of the Lab!! 
 
 You should already have a good understanding of what we are trying to achieve and therefore it is time for us to get closer to what our *base-chart's lifecycle* would look like in real scenarios.
 

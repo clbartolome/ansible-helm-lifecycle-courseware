@@ -1,7 +1,7 @@
 = First Execution
 include::_attributes.adoc[]
 
-IMPORTANT: During this laboratory exercises you will see *<student>* in some files and URLs, remember to update it with your assigned *student id*.
+WARNING: Visit xref:user-configuration.adoc[*User Configuration section*] to configure your username if you haven't set it up yet!
 
 [#webhook]
 == Configure Webhook
@@ -41,10 +41,50 @@ Nexus is going to be the repository where we're going to upload our packaged *ba
 
 * Login into *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *05-helm-package-nexus.yml*.
-* Replace all *<student>* ocurrences with your student id. 
-* Click *Commit Changes*.
+* Add the following content:
 
-image::2-first-nexus-playbook.png[]
+[.console-input]
+[source,yml,subs="attributes+,+macros"]	
+----	
+---
+- name: Helm Package
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Helm Package
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git
+        dest: /tmp/base-chart
+        version: master
+
+    - name: Package Helm test scenario
+      ansible.builtin.shell: helm package chart
+      args:
+        chdir: /tmp/base-chart
+
+    - name: Load Chart information
+      ansible.builtin.include_vars:
+        file: /tmp/base-chart/chart/Chart.yaml
+
+    - name: Upload Helm Base Chart package to Nexus
+      ansible.builtin.shell: |
+        curl -X 'POST' \
+        'http://%USER%:%USER%@nexus.app-lifecycle-lab.svc:8081/service/rest/v1/components?repository=%USER%' \
+        -H 'accept: application/json' \
+        -H 'Content-Type: multipart/form-data' \
+        -F 'helm.asset=@base-chart-{{ version }}.tgz;type=application/gzip'
+      args:
+        chdir: /tmp/base-chart
+
+    # TODO:  "Populate New Base Chart version {{ version }}"
+----	
+ 
+* Click *Commit Changes*.
 
 [#chart]
 == Update Chart Repository
@@ -54,9 +94,11 @@ Now it is time to trigger our *AAP Workflow*. To do so we're going to make a cha
 * Login into *Gitea* and open *base-chart* repository.
 * Open the file *chart/Chart.yaml*.
 * Modify *version* to *1.0.0*.
-* Click *Commit Changes*.
 
 image::2-first-basechart.png[]
+
+* Click *Commit Changes*.
+
 
 [#validate]
 == Validate Execution
@@ -71,7 +113,7 @@ image::2-first-aap-wf.png[]
 
 image::2-first-wf-view.png[]
 
-Now let's login into *Nexus* > *Browse* > *<student>* to validate that the new version of your *base-chart* has been uploaded.
+Now let's login into *Nexus* > *Browse* > *%USER%* to validate that the new version of your *base-chart* has been uploaded.
 
 image::2-first-nx-chart.png[]
 
@@ -83,9 +125,7 @@ Currently your *demo-app* deployment in *ArgoCD* is pointing to an initial versi
 * Login into *Gitea* and open *demo-app* repository.
 * Open the file *deploy/Chart.yaml* and update:
 ** Repository: change */helm* with your student id.
-** Version: update to *1.0.0*. 
-
-Example (#replace <student> with your student id#):
+** Version: update to *1.0.0*:
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -98,7 +138,7 @@ version: 1.0
 appVersion: "1.0.0"
 dependencies:
 - name: base-chart
-  repository: http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/<student>/
+  repository: http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/%USER%/
   version: 1.0.0
 ----	
 
@@ -108,7 +148,7 @@ dependencies:
 
 image::2-first-argo.png[]
 
-* Login into OpenShift and go to *Topology* and select your *<student>-demo-app* namespace.
+* Login into OpenShift and go to *Topology* and select your *%USER%-demo-app* namespace.
 * Open your *deployment* clicking on the *NGINX* icon:
 
 image::2-first-ocp-ov.png[]
@@ -119,7 +159,7 @@ image::2-first-pod-labels.png[]
 
 NOTE: Review the other labels added by the *base-chart* to help on cluster housekeeping tasks.
 
-* Use the *URL* button to open your application, the chart version should be *base-chart-1.0.0*:
+* Use the *URL* button in OpenShift topology view to open your application, the chart version should be *base-chart-1.0.0*:
 
 image::2-first-demo-app.png[]
 

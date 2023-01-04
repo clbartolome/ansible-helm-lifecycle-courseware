@@ -1,6 +1,9 @@
 = Welcome to Ansible Helm Lifecycle Lab
 :page-layout: home
 :!sectids:
+ifndef::lab[]
+:lab-name: Java
+endif::[]
 
 == Introduction
 

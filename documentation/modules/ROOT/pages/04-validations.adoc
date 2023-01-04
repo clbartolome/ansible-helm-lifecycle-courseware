@@ -2,9 +2,11 @@
 
 Now that the namespace has been created and the test *base-chart* has been installed, we can start performing some tests to be sure the *base-chart* is working as expected.
 
-IMPORTANT: Take a look at xref:03-testing_environment.adoc#run-manually[*Run Workflow Manually*] section to review how to test the Workflow manually.
-
 The first thing that we should do is create a task to download the *base-chart* code and read the scenario1 values so we can perform some validations.
+
+WARNING: Visit xref:user-configuration.adoc[*User Configuration section*] to configure your username if you haven't set it up yet!
+
+TIP: Take a look at xref:03-testing_environment.adoc#run-manually[*Run Workflow Manually*] section to review how to test the Workflow manually.
 
 [tabs, subs="attributes+,+macros"]	
 ====	
@@ -27,14 +29,14 @@ Solution::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *02-validate-test-scenario.yml* and edit it.
-* Add a task to clone *base-chart* repository (#replace <student> with your student id#):
+* Add a task to clone *base-chart* repository :
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
 - name: Clone Base Chart remote repository
   ansible.builtin.git:
-    repo: http://gitea.app-lifecycle-lab.svc:3000/<student>/base-chart.git
+    repo: http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git
     dest: /tmp/base-chart
     version: master
 ----	
@@ -79,7 +81,7 @@ Solution::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *02-validate-test-scenario.yml* and edit it.
-* Add a task to get the *deployment* that it is running in your test namespace (#replace <student> with your student id#):
+* Add a task to get the *deployment* that it is running in your test namespace :
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -88,7 +90,7 @@ Solution::
   kubernetes.core.k8s_info:
     api_version: apps/v1
     kind: Deployment
-    namespace: "<student>-base-chart"
+    namespace: "%USER%-base-chart"
     label_selectors:
       - app=scenario1
   ignore_errors: true
@@ -140,7 +142,7 @@ Solution::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *02-validate-test-scenario.yml* and edit it.
-* Add a task to get the *route* that should exist in your test namespace (#replace <student> with your student id#):
+* Add a task to get the *route* that should exist in your test namespace :
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
@@ -149,7 +151,7 @@ Solution::
   kubernetes.core.k8s_info:
     api_version: route.openshift.io/v1
     kind: Route
-    namespace: "<student>-base-chart"
+    namespace: "%USER%-base-chart"
     label_selectors:
       - app=scenario1
   register: scenario_route
