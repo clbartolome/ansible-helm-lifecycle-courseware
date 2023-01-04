@@ -19,7 +19,7 @@ NOTE: During the laboratory you will have to make changes to this repositories. 
 [#aap]
 == Ansible Automation Platform
 
-TODO: content
+Red Hat Ansible Automation Platform is an automation enterprise solution which enables you with a web-based user interface, a REST API, and a powerful task engine built on top of Ansible. It also containes hundreds of production-ready collections that you can integrate in your own code to save time and effort.
 
 [#ocp]
 == OpenShift
