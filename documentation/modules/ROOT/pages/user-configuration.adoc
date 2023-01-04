@@ -2,9 +2,9 @@
 :page-layout: home
 :!sectids:
 
-During this laboratory exercises you will see % USER % in some files and URLs and you will have to replace it with your *student id*. 
+During this laboratory exercises you will see % USER % in some files and URLs and you will have to replace it with your *asigned student*. 
 
-In order to make your work easier you can introduce your *studentid* and press *enter* on the input field on this web site navigation top bar:
+In order to make your work easier you can introduce your *student* and press *asigned student* on the input field on this web site navigation top bar:
 
 image::user_config.png[]
 

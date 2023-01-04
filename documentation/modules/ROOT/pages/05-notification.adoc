@@ -1,35 +1,105 @@
 = Notifications
 
+If everything worked as expected it is time to notify other teams so they can update their deployments and take advantage of the new features or fixed errors.
+
+In this laboratory we're going to use *Slack*. 
+
+WARNING: Visit xref:user-configuration.adoc[*User Configuration section*] to configure your username if you haven't set it up yet!
+
+TIP: Take a look at xref:03-testing_environment.adoc#run-manually[*Run Workflow Manually*] section to review how to test the Workflow manually.
+
 [#config]
 == User Configuration
 
 TODO: Content
 
 [#task]
-== Task
+== Send Notification
 
-TODO: Content
+In this section we're going to configure the last task or playbook so we send a notification with some basic information.
 
+Of course that information could be extended with other information like a git release link, description of the changes, jira tickets, nexus url, aap url,...
 
-    - name: "Populate New Base Chart version {{ version }}"
-      ansible.builtin.set_stats:
-        data:
-          new_version: "{{ version }}"
+The first thing we have to do is save the new chart version as a variable so we can read it in the *notify-new-release* task.
 
+[tabs, subs="attributes+,+macros"]	
+====	
+Steps::	
++	
+--	
+* Go to *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *05-helm-package-nexus.yml* and edit it.
+* Add a task to store the chart version as a variable named *new_version*.
+* Commit your changes.
 
+TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/ansible/builtin/set_stats_module.html[ansible.builtin.set_stats]* to create the variable.
 
+TIP: To get the chart version take a look at a task named *Load Chart information* in that same playbook.
 
-    - name: Send New Base Chart version Slack notification
-      community.general.slack:
-        token: "{{ lookup('env','SLACK_TOKEN') }}"
-        msg: |
-            ### Base Chart Pipeline ###
-            --------------------------------------
-            `Status`: Success.
-            `New Base Chart Version`: {{ new_version }}
-            --------------------------------------
-        channel: "{{ lookup('env','SLACK_CHANNEL') }}"
-        color: good
-        username: "%USER%"
-        link_names: 0
-        parse: 'none'
+--	
+Solution::	
++	
+--	
+* Go to *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *05-helm-package-nexus.yml* and edit it.
+* Add a task to store the chart version as a variable named *new_version*:
+
+[.console-input]
+[source,yml,subs="attributes+,+macros"]	
+----	
+- name: "Populate New Base Chart version {{ version }}"
+  ansible.builtin.set_stats:
+    data:
+      new_version: "{{ version }}"
+----	
+
+* Commit your changes.
+====
+
+Now that the *new version* is saved as a variable in our Workflow we can send a notification on each new release.
+
+[tabs, subs="attributes+,+macros"]	
+====	
+Steps::	
++	
+--	
+* Go to *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *06-notify-new-release.yml* and edit it.
+* Add a task to send a notification to *Slack* with:
+** token: "{{ lookup('env','SLACK_TOKEN') }}".
+** msg:  the value of the variable *new_version*.
+** channel: "{{ lookup('env','SLACK_CHANNEL') }}".
+** Configure the rest as you consider.
+* Commit your changes.
+
+TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/community/general/slack_module.html[community.general.slack]* to send the notification.
+
+--	
+Solution::	
++	
+--	
+* Go to *Gitea* and open *helm-ansible-pipeline* repository.
+* Open the playbook *06-notify-new-release.yml* and edit it.
+* Add a task to send a notification to *Slack*:
+
+[.console-input]
+[source,yml,subs="attributes+,+macros"]	
+----	
+- name: Send New Base Chart version Slack notification
+  community.general.slack:
+    token: "{{ lookup('env','SLACK_TOKEN') }}"
+    msg: |
+        ### Base Chart Pipeline ###
+        --------------------------------------
+        `Status`: Success.
+        `New Base Chart Version`: {{ new_version }}
+        --------------------------------------
+    channel: "{{ lookup('env','SLACK_CHANNEL') }}"
+    color: good
+    username: "%USER%"
+    link_names: 0
+    parse: 'none'
+----	
+
+* Commit your changes.
+====
