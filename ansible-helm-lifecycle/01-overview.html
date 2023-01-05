@@ -352,7 +352,7 @@ To review your <strong>demo-app</strong> login into OpenShift, go to <strong>top
 <p>Nexus is an open source repository that supports many artifacts formats like Java, Npm or Helm. In this laboratory we use Nexus to store the <strong>base-chart</strong> Helm Chart packaged version.</p>
 </div>
 <div class="paragraph">
-<p>As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. Access nexus and go to <strong>Browse</strong> to review your empty repository for helm packages.</p>
+<p>As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. Access nexus, sign in with your <strong>student user</strong> and go to <strong>Browse</strong> &gt; <strong>%USER%</strong> to review the repository that we are going to use to store helm packages.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -380,7 +380,15 @@ Initially your <strong>demo-app</strong> is using a Helm Chart deployed by labor
 <p>Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. Follows the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. In this laboratory we use Helm Charts to specify the Kubernetes manifests.</p>
 </div>
 <div class="paragraph">
-<p>Login into Argo CD to take a look at your <strong>demo-app</strong> application and see the status and the resources' tree:</p>
+<p>Login into Argo CD via <strong>OpenShift</strong> and select <strong>Allow selected permissions</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/1-overview-access-argo.png" alt="1 overview access argo">
+</div>
+</div>
+<div class="paragraph">
+<p>Acces your <strong>demo-app</strong> by clicking in your <strong>%USER%-demo-app</strong> to take a look at the application status and resources' tree:</p>
 </div>
 <div class="imageblock">
 <div class="content">
