@@ -41,7 +41,7 @@ Nexus is going to be the repository where we're going to upload our packaged *ba
 
 * Login into *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *05-helm-package-nexus.yml*.
-* Add the following content:
+* Replace all content with this:
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
