@@ -10,7 +10,7 @@ We have created a Helm Chart named *base-chart* that will help Operation Teams w
 
 The first step is creating a webhook in our *AAP Workflow* (pipeline) and configure it in *Gitea base-chart* repository so we can trigger it when new features or fixes are commited in our repository.
 
-=== Create Webhook
+=== Create Webhook in AAP
 
 * Login into *Ansible Automation Platform* and go to: *Resources* > *Templates* > *[WF] Base Chart Pipeline* and click *edit*.
 * Enable the option *Enable Webhook*.
@@ -35,7 +35,7 @@ image::2-first-giteawh.png[]
 
 
 [#nexus]
-== Configure Nexus
+== Configure Nexus Package Playbook
 
 Nexus is going to be the repository where we're going to upload our packaged *base-chart*. In order to be able to upload it automatically as part of our pipeline, we need to modify the playbook where the chart is packaged and uploaded to point to your student repository in Nexus.
 
@@ -47,7 +47,7 @@ Nexus is going to be the repository where we're going to upload our packaged *ba
 [source,yml,subs="attributes+,+macros"]	
 ----	
 ---
-- name: Helm Package
+- name: Helm Package Nexus
   hosts: all
   gather_facts: false
 
@@ -71,10 +71,14 @@ Nexus is going to be the repository where we're going to upload our packaged *ba
       ansible.builtin.include_vars:
         file: /tmp/base-chart/chart/Chart.yaml
 
+    - name: Nexus Credentials
+      ansible.builtin.set_fact:
+        nexus_credentials: "%USER%:%USER%"
+
     - name: Upload Helm Base Chart package to Nexus
       ansible.builtin.shell: |
         curl -X 'POST' \
-        'http://%USER%:%USER%@nexus.app-lifecycle-lab.svc:8081/service/rest/v1/components?repository=%USER%' \
+        'http://{{ nexus_credentials }}@nexus.app-lifecycle-lab.svc:8081/service/rest/v1/components?repository=%USER%' \
         -H 'accept: application/json' \
         -H 'Content-Type: multipart/form-data' \
         -F 'helm.asset=@base-chart-{{ version }}.tgz;type=application/gzip'
