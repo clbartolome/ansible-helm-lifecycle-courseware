@@ -39,7 +39,7 @@ image::1-overview-openurl.png[]
 
 Nexus is an open source repository that supports many artifacts formats like Java, Npm or Helm. In this laboratory we use Nexus to store the *base-chart* Helm Chart packaged version.
 
-As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. Access nexus and go to *Browse* to review your empty repository for helm packages.
+As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. Access nexus, sign in with your *student user* and go to *Browse* > *%USER%* to review the repository that we are going to use to store helm packages.
 
 image::1-overview-nexus.png[]
 
@@ -50,7 +50,11 @@ NOTE: Initially your *demo-app* is using a Helm Chart deployed by laboratory adm
 
 Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. Follows the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. In this laboratory we use Helm Charts to specify the Kubernetes manifests.
 
-Login into Argo CD to take a look at your *demo-app* application and see the status and the resources' tree:
+Login into Argo CD via *OpenShift* and select *Allow selected permissions*:
+
+image::1-overview-access-argo.png[]
+
+Acces your *demo-app* by clicking in your *%USER%-demo-app* to take a look at the application status and resources' tree:
 
 image::1-overview-argoapp.png[]
 
