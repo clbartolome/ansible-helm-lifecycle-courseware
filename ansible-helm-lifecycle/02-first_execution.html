@@ -278,7 +278,7 @@ Visit <a href="user-configuration.html" class="xref page"><strong>User Configura
 <p>The first step is creating a webhook in our <strong>AAP Workflow</strong> (pipeline) and configure it in <strong>Gitea base-chart</strong> repository so we can trigger it when new features or fixes are commited in our repository.</p>
 </div>
 <div class="sect2">
-<h3 id="_create_webhook"><a class="anchor" href="#_create_webhook"></a>Create Webhook</h3>
+<h3 id="_create_webhook_in_aap"><a class="anchor" href="#_create_webhook_in_aap"></a>Create Webhook in AAP</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -353,7 +353,7 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 </div>
 </div>
 <div class="sect1">
-<h2 id="nexus"><a class="anchor" href="#nexus"></a>Configure Nexus</h2>
+<h2 id="nexus"><a class="anchor" href="#nexus"></a>Configure Nexus Package Playbook</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Nexus is going to be the repository where we&#8217;re going to upload our packaged <strong>base-chart</strong>. In order to be able to upload it automatically as part of our pipeline, we need to modify the playbook where the chart is packaged and uploaded to point to your student repository in Nexus.</p>
@@ -374,7 +374,7 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
-- name: Helm Package
+- name: Helm Package Nexus
   hosts: all
   gather_facts: false
 
@@ -398,10 +398,14 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
       ansible.builtin.include_vars:
         file: /tmp/base-chart/chart/Chart.yaml
 
+    - name: Nexus Credentials
+      ansible.builtin.set_fact:
+        nexus_credentials: "%USER%:%USER%"
+
     - name: Upload Helm Base Chart package to Nexus
       ansible.builtin.shell: |
         curl -X 'POST' \
-        'http://%USER%:%<a href="mailto:USER%@nexus.app-lifecycle-lab.svc">USER%@nexus.app-lifecycle-lab.svc</a>:8081/service/rest/v1/components?repository=%USER%' \
+        'http://{{ nexus_credentials }}@nexus.app-lifecycle-lab.svc:8081/service/rest/v1/components?repository=%USER%' \
         -H 'accept: application/json' \
         -H 'Content-Type: multipart/form-data' \
         -F 'helm.asset=@base-chart-{{ version }}.tgz;type=application/gzip'
