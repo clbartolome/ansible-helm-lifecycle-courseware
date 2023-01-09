@@ -148,7 +148,7 @@ dependencies:
 
 * Commit your changes.
 
-* Login into *ArgoCD* and open your *demo-app* application. *ArgoCD* automatically syncs each 3 minutes but we can manually force *ArgoCD* synchronization by pressing the *SYNC* button (use the default synchronization values). Now you should see your changes applied in the section *LAST SYNC RESULT*.
+* Login into *ArgoCD* and open your *demo-app* application. *ArgoCD* automatically syncs each 3 minutes but we can manually force *ArgoCD* synchronization by pressing the *REFRESH* button (use the default synchronization values). Now you should see your changes applied in the section *LAST SYNC RESULT*.
 
 image::2-first-argo.png[]
 
