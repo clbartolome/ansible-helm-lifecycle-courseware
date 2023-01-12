@@ -32,8 +32,6 @@ You may login using your credentials and go to the *Templates* section. You shou
 - [JT] Validate Test Scenario		
 - [WF] Base Chart Pipeline
 
-image::1-overview-aap.png[]
-
 [#ocp]
 == OpenShift
 
