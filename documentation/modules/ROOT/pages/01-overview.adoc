@@ -21,6 +21,19 @@ NOTE: During the laboratory you will have to make changes to this repositories. 
 
 Red Hat Ansible Automation Platform is an automation enterprise solution which enables you with a web-based user interface, a REST API, and a powerful task engine built on top of Ansible. It also containes hundreds of production-ready collections that you can integrate in your own code to save time and effort.
 
+You may login using your credentials and go to the *Templates* section. You should see the following list of job and workflow templates ready to use:
+
+- [JT] Create Test Namespace
+- [JT] Delete Test Namespace		
+- [JT] Helm Package Nexus		
+- [JT] Install Test Scenario		
+- [JT] Notify New Release		
+- [JT] Uninstall Test Scenario		
+- [JT] Validate Test Scenario		
+- [WF] Base Chart Pipeline
+
+image::1-overview-aap.png[]
+
 [#ocp]
 == OpenShift
 
