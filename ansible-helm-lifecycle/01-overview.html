@@ -283,10 +283,10 @@ Access links and credentials for all this components should be provided by the <
 <p><strong>base-chart</strong>: Helm Chart used in this laboratory to deploy applications and whose lifecycle we are going to work on.</p>
 </li>
 <li>
-<p><strong>helm-ansible-pipeline</strong>: contains the templates that form the <strong>base-chart</strong> pipeline (workflow) in Ansible Automation Platform.</p>
+<p><strong>helm-ansible-pipeline</strong>: Contains the templates that form the <strong>base-chart</strong> pipeline (workflow) in Ansible Automation Platform.</p>
 </li>
 <li>
-<p><strong>demo-app</strong>: web application to demonstrate the deployment of an application using the chart. Shows the versions of the application and the Helm chart used for its deployment.</p>
+<p><strong>demo-app</strong>: Web application to demonstrate the deployment of an application using the chart. Shows the versions of the application and the Helm chart used for its deployment.</p>
 </li>
 </ul>
 </div>
@@ -311,35 +311,47 @@ During the laboratory you will have to make changes to this repositories. Labora
 <p>Red Hat Ansible Automation Platform is an automation enterprise solution which enables you with a web-based user interface, a REST API, and a powerful task engine built on top of Ansible. It also containes hundreds of production-ready collections that you can integrate in your own code to save time and effort.</p>
 </div>
 <div class="paragraph">
-<p>You may login using your credentials and go to the <strong>Templates</strong> section. You should see the following list of job and workflow templates ready to use:</p>
+<p>You may login using your credentials and go to <strong>Resources</strong> &gt; <strong>Templates</strong> section. You should see the following list of job and workflow templates ready to use:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>[JT] Create Test Namespace</p>
+<p><strong>[JT] Create Test Namespace</strong>: Creates a namespace in OpenShift in which we will install our test scenario a run our validations.</p>
 </li>
 <li>
-<p>[JT] Delete Test Namespace</p>
+<p><strong>[JT] Delete Test Namespace</strong>: Deletes the namespace we created in OpenShift for testing.</p>
 </li>
 <li>
-<p>[JT] Helm Package Nexus</p>
+<p><strong>[JT] Helm Package Nexus</strong>: Packages our <strong>base-chart</strong> Helm and uploads it into our Nexus repository.</p>
 </li>
 <li>
-<p>[JT] Install Test Scenario</p>
+<p><strong>[JT] Install Test Scenario</strong>: Installs our test scenario in the OpenShift namespace we created.</p>
 </li>
 <li>
-<p>[JT] Notify New Release</p>
+<p><strong>[JT] Notify New Release</strong>: Notifies to our Developers about a new realase of the <strong>base-chart</strong>.</p>
 </li>
 <li>
-<p>[JT] Uninstall Test Scenario</p>
+<p><strong>[JT] Uninstall Test Scenario</strong>: Uninstalls our test scenario from the OpenShift namespace we created.</p>
 </li>
 <li>
-<p>[JT] Validate Test Scenario</p>
+<p><strong>[JT] Validate Test Scenario</strong>	: Validates our test scenario.</p>
 </li>
 <li>
-<p>[WF] Base Chart Pipeline</p>
+<p><strong>[WF] Base Chart Pipeline</strong>: Workflow we will use to deploy, validate and package our <strong>base-chart</strong>.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+During the laboratory you will have to make changes in the playbooks that make up the Workflow <strong>[WF] Base Chart Pipeline</strong>. You can find all these playbooks in the <strong>helm-ansible-pipeline</strong> in Gitea.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
