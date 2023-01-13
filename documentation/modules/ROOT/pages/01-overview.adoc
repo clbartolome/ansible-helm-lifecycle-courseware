@@ -32,7 +32,7 @@ You may login using your credentials and go to *Resources* > *Templates* section
 - *[JT] Validate Test Scenario*	: Validates our test scenario.
 - *[WF] Base Chart Pipeline*: Workflow we will use to deploy, validate and package our *base-chart*.
 
-NOTE: During the laboratory you will have to make changes in the playbooks that make up the Workflow *[WF] Base Chart Pipeline*. You can find all these playbooks in the *helm-ansible-pipeline* in Gitea.
+NOTE: During the laboratory you will have to make changes in the playbooks that make up the Workflow *[WF] Base Chart Pipeline*. You can find all these playbooks in the *helm-ansible-pipeline* repository in Gitea.
 
 [#ocp]
 == OpenShift
