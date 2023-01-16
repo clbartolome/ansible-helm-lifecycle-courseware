@@ -1,14 +1,20 @@
 = Overview
 include::_attributes.adoc[]
 
-IMPORTANT: Access links and credentials for all this components should be provided by the *laboratory team*.
+[IMPORTANT]
+====
+Yor credentials for logging in into every application are: 
+
+* User: *%USER%* 
+* Password: *%USER%*
+====
 
 [#gitea]
 == Gitea
 
 Gitea is a web-based collaborative software platform for hosting software development version control using Git, as well as other collaborative features like bug tracking, code review, kanban boards, tickets, and wikis. 
 
-This laboratory includes three repositories:
+Login into Gitea and take a look at these three repositories:
 
 * *base-chart*: Helm Chart used in this laboratory to deploy applications and whose lifecycle we are going to work on.
 * *helm-ansible-pipeline*: Contains the templates that form the *base-chart* pipeline (workflow) in Ansible Automation Platform.
@@ -39,20 +45,24 @@ NOTE: During the laboratory you will have to make changes in the playbooks that 
 
 OpenShift is Red Hat's enterprise-ready Kubernetes platform. OpenShift is hosting all the components used in this laboratory (AAP, Gitea, ArgoCD, Nexus, ...).
 
-As a laboratory student, you have an already created namespace named *%USER%-demo-app* that contains an application used for testing the *base-chart*. The application looks like this:
+As a laboratory student, you have an already created namespace named *%USER%-demo-app* that contains an application used for testing the *base-chart*. 
 
-image::1-overview-demoapp.png[]
-
-TIP: To review your *demo-app* login into OpenShift, go to *topology*, select *%USER%-demo-app* namespace and click the *Open Url* button.
+Login into OpenShift and go to *topology*, select *%USER%-demo-app* namespace and click the *Open Url* button.
 
 image::1-overview-openurl.png[]
+
+You should see this:
+
+image::1-overview-demoapp.png[]
 
 [#nexus]
 == Nexus
 
 Nexus is an open source repository that supports many artifacts formats like Java, Npm or Helm. In this laboratory we use Nexus to store the *base-chart* Helm Chart packaged version.
 
-As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. Access nexus, sign in with your *student user* and go to *Browse* > *%USER%* to review the repository that we are going to use to store helm packages.
+As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. 
+
+Login into nexus, *sign* in with your *student user* and go to *Browse* > *%USER%* to review the repository that we are going to use to store helm packages.
 
 image::1-overview-nexus.png[]
 

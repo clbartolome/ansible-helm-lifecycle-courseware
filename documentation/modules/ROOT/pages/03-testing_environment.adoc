@@ -1,7 +1,7 @@
 = Testing Environment
 include::_attributes.adoc[]
 
-WARNING: Visit xref:user-configuration.adoc[*User Configuration section*] to configure your username if you haven't set it up yet!
+WARNING: Visit *User Configuration section* to configure your username if you haven't set it up yet!
 
 In order to execute some validations on our *base-chart* we need to create an ephemeral namespace in OpenShift (will be deleted after testing) and deploy (or install as it is known in Helm) a testing application.
 
@@ -79,19 +79,29 @@ Solution::
 
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *00-create-namespace.yml* and edit it.
-* Add a task to create a namespace named *%USER%-base-chart* :
+* Modify the playbook adding a new task to create a namespace named *%USER%-base-chart*. The playbook would be like:
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-- name: Create Base Chart test namespace
-  kubernetes.core.k8s:
-    definition:
-      apiVersion: project.openshift.io/v1
-      kind: Project
-      metadata:
-        name: "%USER%-base-chart"
-    state: present	
+---
+- name: Create Base Chart namespace
+  hosts: all
+  gather_facts: false
+  
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Create Base Chart namespace
+
+    - name: Create Base Chart test namespace
+      kubernetes.core.k8s:
+        definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: "%USER%-base-chart"
+        state: present	
 ----	
 
 * Commit your changes.
@@ -109,8 +119,8 @@ Steps::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *01-install-test-scenario.yml* and edit it.
-* Add a task to clone *base-chart* repository (you can use /tmp/basechart as destination).
-* Add a task to install the scenario1. Chart is in */base-chart/chart* and values are in */base-chart/test/scenario1/values.yaml*.
+* Add a new task to clone *base-chart* repository (you can use /tmp/basechart as destination).
+* Add a new task to install the scenario1. Chart is in */base-chart/chart* and values are in */base-chart/test/scenario1/values.yaml*.
 * Commit your changes.
 
 TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/ansible/builtin/git_module.html[ansible.builtin.git]* to clone the repository.
@@ -125,32 +135,60 @@ Solution::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *01-install-test-scenario.yml* and edit it.
-* Add a task to clone *base-chart* repository :
+* Add a new task to clone *base-chart* repository. The playbook would be like:
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-- name: Clone Base Chart remote repository
-  ansible.builtin.git:
-    repo: http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git
-    dest: /tmp/base-chart
-    version: master
+---
+- name: Install Helm scenario
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Install Helm scenario
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git
+        dest: /tmp/base-chart
+        version: master
+   
+    # TODO: Install Helm test scenario1
 ----	
 
-* Add a task to install the scenario1. Chart is in */base-chart/chart* and values are in */base-chart/test/scenario1/values.yaml* :
+* Add a new task to install the scenario1. Chart is in */base-chart/chart* and values are in */base-chart/test/scenario1/values.yaml*. The playbook would be like:
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-- name: "Install Helm test scenario 1"
-  kubernetes.core.helm:
-    name: "scenario1"
-    chart_ref: "/tmp/base-chart/chart"
-    release_namespace: "%USER%-base-chart"
-    wait: yes
-    values_files:
-      - "/tmp/base-chart/test/scenario1/values.yaml"
-  register: install_output
+---
+- name: Install Helm scenario
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Install Helm scenario
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git
+        dest: /tmp/base-chart
+        version: master
+   
+    - name: "Install Helm test scenario 1"
+      kubernetes.core.helm:
+        name: "scenario1"
+        chart_ref: "/tmp/base-chart/chart"
+        release_namespace: "%USER%-base-chart"
+        wait: yes
+        values_files:
+          - "/tmp/base-chart/test/scenario1/values.yaml"
+      register: install_output
 ----	
 
 * Commit your changes.
@@ -168,7 +206,7 @@ Steps::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *03-uninstall-test-scenario.yml* and edit it.
-* Add a task to uninstall the scenario1.
+* Add a new task to uninstall the scenario1.
 * Commit your changes.
 
 TIP: Remember to use the already downloaded repository
@@ -181,18 +219,28 @@ Solution::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *03-uninstall-test-scenario.yml* and edit it.
-* Add a task to uninstall the scenario1 :
+* Add a new task to uninstall the scenario1. The playbook would be like:
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-- name: Uninstall  Helm test scenario
-  kubernetes.core.helm:
-    name: "scenario1"
-    chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
-    release_namespace: "%USER%-base-chart"
-    state: absent
-    wait: yes
+---
+- name: Uninstall Helm scenario
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Uninstall Helm scenario
+        
+    - name: Uninstall  Helm test scenario
+      kubernetes.core.helm:
+        name: "scenario1"
+        chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
+        release_namespace: "%USER%-base-chart"
+        state: absent
+        wait: yes
 ----	
 
 * Commit your changes.
@@ -210,7 +258,7 @@ Steps::
 --	
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *04-delete-namespace.yml* and edit it.
-* Add a task to delete the namespace named *%USER%-base-chart* .
+* Add a new task to delete the namespace named *%USER%-base-chart* .
 * Commit your changes.
 
 TIP: Use the collection *https://docs.ansible.com/ansible/latest/collections/kubernetes/core/k8s_module.html[kubernetes.core.k8s]* to create the namespace.
@@ -222,19 +270,29 @@ Solution::
 
 * Go to *Gitea* and open *helm-ansible-pipeline* repository.
 * Open the playbook *04-delete-namespace.yml* and edit it.
-* Add a task to delete the namespace named *%USER%-base-chart* :
+* Add a new task to delete the namespace named *%USER%-base-chart*. The playbook would be like:
 
 [.console-input]
 [source,yml,subs="attributes+,+macros"]	
 ----	
-- name: Delete Base Chart test namespace
-  kubernetes.core.k8s:
-    definition:
-      apiVersion: project.openshift.io/v1
-      kind: Project
-      metadata:
-        name: "%USER%-base-chart"
-    state: absent
+---
+- name: Delete Base Chart namespace
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Delete Base Chart namespace
+
+    - name: Delete Base Chart test namespace
+      kubernetes.core.k8s:
+        definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: "%USER%-base-chart"
+        state: absent
 ----	
 
 * Commit your changes.

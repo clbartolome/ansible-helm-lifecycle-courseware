@@ -1,7 +1,7 @@
 = First Execution
 include::_attributes.adoc[]
 
-WARNING: Visit xref:user-configuration.adoc[*User Configuration section*] to configure your username if you haven't set it up yet!
+WARNING: Visit *User Configuration section* to configure your username if you haven't set it up yet!
 
 [#webhook]
 == Configure Webhook
@@ -25,6 +25,9 @@ NOTE: Copy the *Webhook Key* and the *Webhook URL*.
 
 * Login into *Gitea* and open *base-chart* repository.
 * Go to *Settings* (top right corner) > *Webhook* > *Add Webhook* > *Gitea*.
+
+image::2-first-whgit.png[]
+
 * Configure the following fields:
 ** *Target URL*: Copy the *Webhook URL* from AAP.
 ** *Secret*: Copy the *Webhook Key* from AAP.
@@ -142,7 +145,7 @@ version: 1.0
 appVersion: "1.0.0"
 dependencies:
 - name: base-chart
-  repository: http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/%USER%/
+  repository: http://nexus.app-lifecycle-lab.svc:8081/repository/%USER%/
   version: 1.0.0
 ----	
 
