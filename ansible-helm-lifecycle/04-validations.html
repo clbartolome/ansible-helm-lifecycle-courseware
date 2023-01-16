@@ -112,106 +112,22 @@
     <a class="nav-link" href="user-configuration.html">User Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="01-overview.html">1. Overview</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#gitea">Gitea</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#aap">Ansible Automation Platform</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#ocp">OpenShift</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#nexus">Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#argo">Argo CD</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="02-first_execution.html">2. First Execution</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#webhook">Configure Webhook</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#nexus">Configure Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#chart">Update Chart Repository</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#validate">Validate Execution</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#app">Update Application</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="03-testing_environment.html">3. Testing Environment</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#create-ns">Create Namespace</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="04-validations.html">4. Validations</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#route">Route</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#size">Size</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="05-notification.html">5. Notifications</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="05-notification.html#config">User Configuration</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="05-notification.html#task">Task</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="06-challenges.html">6. Challenges</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#validations">Aditional Validations</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#scenarios">Multiple Scenarios</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#sizes">New Sizes</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -267,7 +183,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Visit <a href="user-configuration.html" class="xref page"><strong>User Configuration section</strong></a> to configure your username if you haven&#8217;t set it up yet!
+Visit <strong>User Configuration section</strong> to configure your username if you haven&#8217;t set it up yet!
 </td>
 </tr>
 </table>
@@ -279,7 +195,7 @@ Visit <a href="user-configuration.html" class="xref page"><strong>User Configura
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Take a look at <a href="03-testing_environment.html#run-manually" class="xref page"><strong>Run Workflow Manually</strong></a> section to review how to test the Workflow manually.
+Take a look at <strong>3. Testing Environment</strong> &gt; <strong>Run Workflow Manually</strong> to review how to test the Workflow manually.
 </td>
 </tr>
 </table>
@@ -306,10 +222,10 @@ Take a look at <a href="03-testing_environment.html#run-manually" class="xref pa
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to clone <strong>base-chart</strong> repository (you can use /tmp/basechart as destination).</p>
+<p>Add a new task to clone <strong>base-chart</strong> repository (you can use /tmp/basechart as destination).</p>
 </li>
 <li>
-<p>Add a task to read the values of the scenario1 in <strong>/tmp/base-chart/test/scenario1/values.yaml</strong> as variables.</p>
+<p>Add a new task to read the values of the scenario1 in <strong>/tmp/base-chart/test/scenario1/values.yaml</strong> as variables.</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -351,7 +267,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to clone <strong>base-chart</strong> repository :</p>
+<p>Add a new task to clone <strong>base-chart</strong> repository:</p>
 </li>
 </ul>
 </div>
@@ -367,7 +283,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <div class="ulist">
 <ul>
 <li>
-<p>Add a task to read the values of the scenario1 in <strong>/tmp/base-chart/test/scenario1/values.yaml</strong> as variables:</p>
+<p>Add a new task to read the values of the scenario1 in <strong>/tmp/base-chart/test/scenario1/values.yaml</strong> as variables:</p>
 </li>
 </ul>
 </div>
@@ -377,6 +293,57 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
   ansible.builtin.include_vars:
     file: "/tmp/base-chart/test/scenario1/values.yaml"
     name: scenario</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The playbook would be like:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Validate Helm scenario
+  hosts: all
+  gather_facts: false
+  vars:
+    failed: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Validate Helm scenario
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
+        dest: /tmp/base-chart
+        version: master
+
+    - name: Read scenario values
+      ansible.builtin.include_vars:
+        file: "/tmp/base-chart/test/scenario1/values.yaml"
+        name: scenario
+
+    # TODO: Test - Deployment --&gt; Get deployment
+
+    # TODO: Test - Deployment --&gt; Validate the number of replicas is correct
+
+    # TODO: Test - Application Size - S or default
+
+    # TODO: Test - Route --&gt; Get route
+
+    # TODO: Test - Route --&gt; Send request to the route when route is defined and enabled
+
+    # TODO: Test - Route --&gt; Validate route is working when is defined and enabled
+
+    - name: Fail scenario if any validation fails
+      ansible.builtin.assert:
+        that: "{{ failed }} == false"
+        fail_msg: "There are errors in the base-chart"
+        success_msg: "All validations worked as expected"</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -422,10 +389,10 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to get the <strong>deployment</strong> that it is running in your test namespace.</p>
+<p>Add a new task to get the <strong>deployment</strong> that it is running in your test namespace.</p>
 </li>
 <li>
-<p>Add a task to compare the running <strong>deployment</strong> replicas with the defined in the scenario1 values (set the already defined variable <strong>failed</strong> as true if it is different).</p>
+<p>Add a new task to compare the running <strong>deployment</strong> replicas with the defined in the scenario1 values (set the already defined variable <strong>failed</strong> as true if it is different).</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -455,7 +422,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to get the <strong>deployment</strong> that it is running in your test namespace :</p>
+<p>Add a new task to get the <strong>deployment</strong> that it is running in your test namespace:</p>
 </li>
 </ul>
 </div>
@@ -475,7 +442,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <div class="ulist">
 <ul>
 <li>
-<p>Add a task to compare the running <strong>deployment</strong> replicas with the defined in the scenario1 values (set the already defined variable <strong>failed</strong> as true if it is different):</p>
+<p>Add a new task to compare the running <strong>deployment</strong> replicas with the defined in the scenario1 values (set the already defined variable <strong>failed</strong> as true if it is different):</p>
 </li>
 </ul>
 </div>
@@ -485,6 +452,64 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
   ansible.builtin.set_fact:
     failed: true
   when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The playbook would be like:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Validate Helm scenario
+  hosts: all
+  gather_facts: false
+  vars:
+    failed: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Validate Helm scenario
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
+        dest: /tmp/base-chart
+        version: master
+
+    - name: Read scenario values
+      ansible.builtin.include_vars:
+        file: "/tmp/base-chart/test/scenario1/values.yaml"
+        name: scenario
+
+    - name: Test - Deployment --&gt; Get deployment
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        namespace: "%USER%-base-chart"
+        label_selectors:
+          - app=scenario1
+      ignore_errors: true
+      register: scenario_deployment
+
+    - name: Test - Deployment --&gt; Validate the number of replicas is correct
+      ansible.builtin.set_fact:
+        failed: true
+      when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas
+
+    # TODO: Test - Application Size - S or default
+
+    # TODO: Test - Route --&gt; Get route
+
+    # TODO: Test - Route --&gt; Send request to the route when route is defined and enabled
+
+    # TODO: Test - Route --&gt; Validate route is working when is defined and enabled
+
+    - name: Fail scenario if any validation fails
+      ansible.builtin.assert:
+        that: "{{ failed }} == false"
+        fail_msg: "There are errors in the base-chart"
+        success_msg: "All validations worked as expected"</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -530,13 +555,13 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to get the <strong>route</strong> that should exist in your test namespace.</p>
+<p>Add a new task to get the <strong>route</strong> that should exist in your test namespace.</p>
 </li>
 <li>
-<p>Add a task to send a request to the route, get the url from the route we&#8217;ve get on previous step.</p>
+<p>Add a new task to send a request to the route, get the url from the route we&#8217;ve get on previous step.</p>
 </li>
 <li>
-<p>Add a task to validate the previous step response code is 200 (set the already defined variable <strong>failed</strong> as true if it is different).</p>
+<p>Add a new task to validate the previous step response code is 200 (set the already defined variable <strong>failed</strong> as true if it is different).</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -590,7 +615,7 @@ Ignore errors while getting the route, the route creation could be disabled in f
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to get the <strong>route</strong> that should exist in your test namespace :</p>
+<p>Add a new task to get the <strong>route</strong> that should exist in your test namespace:</p>
 </li>
 </ul>
 </div>
@@ -610,7 +635,7 @@ Ignore errors while getting the route, the route creation could be disabled in f
 <div class="ulist">
 <ul>
 <li>
-<p>Add a task to send a request to the route, get the url from the route we&#8217;ve get on previous step:</p>
+<p>Add a new task to send a request to the route, get the url from the route we&#8217;ve get on previous step:</p>
 </li>
 </ul>
 </div>
@@ -630,7 +655,7 @@ Ignore errors while getting the route, the route creation could be disabled in f
 <div class="ulist">
 <ul>
 <li>
-<p>Add a task to validate the previous step response code is <strong>200</strong> (set the already defined variable <strong>failed</strong> as true if it is different):</p>
+<p>Add a new task to validate the previous step response code is <strong>200</strong> (set the already defined variable <strong>failed</strong> as true if it is different):</p>
 </li>
 </ul>
 </div>
@@ -640,6 +665,83 @@ Ignore errors while getting the route, the route creation could be disabled in f
   ansible.builtin.set_fact:
     failed: true
   when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0 and route_response.status != 200</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The playbook would be like:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Validate Helm scenario
+  hosts: all
+  gather_facts: false
+  vars:
+    failed: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Validate Helm scenario
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
+        dest: /tmp/base-chart
+        version: master
+
+    - name: Read scenario values
+      ansible.builtin.include_vars:
+        file: "/tmp/base-chart/test/scenario1/values.yaml"
+        name: scenario
+
+    - name: Test - Deployment --&gt; Get deployment
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        namespace: "%USER%-base-chart"
+        label_selectors:
+          - app=scenario1
+      ignore_errors: true
+      register: scenario_deployment
+
+    - name: Test - Deployment --&gt; Validate the number of replicas is correct
+      ansible.builtin.set_fact:
+        failed: true
+      when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas
+
+    # TODO: Test - Application Size - S or default
+
+    - name: Test - Route --&gt; Get route
+      kubernetes.core.k8s_info:
+        api_version: route.openshift.io/v1
+        kind: Route
+        namespace: "%USER%-base-chart"
+        label_selectors:
+          - app=scenario1
+      register: scenario_route
+      ignore_errors: true
+
+    - name: Test - Route --&gt; Send request to the route when route is defined and enabled
+      ansible.builtin.uri:
+        url: "http://{{ scenario_route.resources[0].spec.host }}"
+        method: GET
+        status_code: 200
+        return_content: yes
+      ignore_errors: true
+      register: route_response
+      when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0
+
+    - name: Test - Route --&gt; Validate route is working when is defined and enabled
+      ansible.builtin.set_fact:
+        failed: true
+      when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0 and route_response.status != 200
+
+    - name: Fail scenario if any validation fails
+      ansible.builtin.assert:
+        that: "{{ failed }} == false"
+        fail_msg: "There are errors in the base-chart"
+        success_msg: "All validations worked as expected"</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -744,7 +846,7 @@ resources:
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to validate that the <strong>S</strong> size resources are the same as the installed ones (set the already defined variable <strong>failed</strong> as true if it is different).</p>
+<p>Add a new task to validate that the <strong>S</strong> size resources are the same as the installed ones (set the already defined variable <strong>failed</strong> as true if it is different).</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -786,7 +888,7 @@ Remember that <strong>S</strong> is also the default size.
 <p>Open the playbook <strong>02-validate-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to validate that the <strong>S</strong> size resources are the same as the installed ones (set the already defined variable <strong>failed</strong> as true if it is different):</p>
+<p>Add a new task to validate that the <strong>S</strong> size resources are the same as the installed ones (set the already defined variable <strong>failed</strong> as true if it is different):</p>
 </li>
 </ul>
 </div>
@@ -800,6 +902,90 @@ Remember that <strong>S</strong> is also the default size.
         scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.memory == "256Mi" and
         scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.cpu == "100m" and
         scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.memory == "256Mi")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The final version of the Playbook should be like:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Validate Helm scenario
+  hosts: all
+  gather_facts: false
+  vars:
+    failed: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Validate Helm scenario
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
+        dest: /tmp/base-chart
+        version: master
+
+    - name: Read scenario values
+      ansible.builtin.include_vars:
+        file: "/tmp/base-chart/test/scenario1/values.yaml"
+        name: scenario
+
+    - name: Test - Deployment --&gt; Get deployment
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        namespace: "%USER%-base-chart"
+        label_selectors:
+          - app=scenario1
+      ignore_errors: true
+      register: scenario_deployment
+
+    - name: Test - Deployment --&gt; Validate the number of replicas is correct
+      ansible.builtin.set_fact:
+        failed: true
+      when: scenario_deployment.resources[0].spec.replicas != scenario.deploy.replicas
+
+    - name: Test - Application Size - S or default
+      ansible.builtin.set_fact:
+        failed: true
+      when: (scenario.size is undefined or scenario.size == "S") and not
+            (scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.cpu == "100m" and
+            scenario_deployment.resources[0].spec.template.spec.containers[0].resources.limits.memory == "256Mi" and
+            scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.cpu == "100m" and
+            scenario_deployment.resources[0].spec.template.spec.containers[0].resources.requests.memory == "256Mi")
+
+    - name: Test - Route --&gt; Get route
+      kubernetes.core.k8s_info:
+        api_version: route.openshift.io/v1
+        kind: Route
+        namespace: "%USER%-base-chart"
+        label_selectors:
+          - app=scenario1
+      register: scenario_route
+      ignore_errors: true
+
+    - name: Test - Route --&gt; Send request to the route when route is defined and enabled
+      ansible.builtin.uri:
+        url: "http://{{ scenario_route.resources[0].spec.host }}"
+        method: GET
+        status_code: 200
+        return_content: yes
+      ignore_errors: true
+      register: route_response
+      when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0
+
+    - name: Test - Route --&gt; Validate route is working when is defined and enabled
+      ansible.builtin.set_fact:
+        failed: true
+      when: scenario.deploy.route is defined and scenario.deploy.route.enabled == true and scenario_route.resources | length &gt; 0 and route_response.status != 200
+
+    - name: Fail scenario if any validation fails
+      ansible.builtin.assert:
+        that: "{{ failed }} == false"
+        fail_msg: "There are errors in the base-chart"
+        success_msg: "All validations worked as expected"</code></pre>
 </div>
 </div>
 <div class="ulist">

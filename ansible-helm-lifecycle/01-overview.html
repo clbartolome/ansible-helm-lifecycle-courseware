@@ -112,106 +112,22 @@
     <a class="nav-link" href="user-configuration.html">User Configuration</a>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="01-overview.html">1. Overview</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#gitea">Gitea</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#aap">Ansible Automation Platform</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#ocp">OpenShift</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#nexus">Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#argo">Argo CD</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="02-first_execution.html">2. First Execution</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#webhook">Configure Webhook</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#nexus">Configure Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#chart">Update Chart Repository</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#validate">Validate Execution</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#app">Update Application</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="03-testing_environment.html">3. Testing Environment</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#create-ns">Create Namespace</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="04-validations.html">4. Validations</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#route">Route</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#size">Size</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="05-notification.html">5. Notifications</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="05-notification.html#config">User Configuration</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="05-notification.html#task">Task</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="06-challenges.html">6. Challenges</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#validations">Aditional Validations</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#scenarios">Multiple Scenarios</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#sizes">New Sizes</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -261,7 +177,19 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Access links and credentials for all this components should be provided by the <strong>laboratory team</strong>.
+<div class="paragraph">
+<p>Yor credentials for logging in into every application are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>User: <strong>%USER%</strong></p>
+</li>
+<li>
+<p>Password: <strong>%USER%</strong></p>
+</li>
+</ul>
+</div>
 </td>
 </tr>
 </table>
@@ -275,7 +203,7 @@ Access links and credentials for all this components should be provided by the <
 <p>Gitea is a web-based collaborative software platform for hosting software development version control using Git, as well as other collaborative features like bug tracking, code review, kanban boards, tickets, and wikis.</p>
 </div>
 <div class="paragraph">
-<p>This laboratory includes three repositories:</p>
+<p>Login into Gitea and take a look at these three repositories:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -362,28 +290,22 @@ During the laboratory you will have to make changes in the playbooks that make u
 <p>OpenShift is Red Hat&#8217;s enterprise-ready Kubernetes platform. OpenShift is hosting all the components used in this laboratory (AAP, Gitea, ArgoCD, Nexus, &#8230;&#8203;).</p>
 </div>
 <div class="paragraph">
-<p>As a laboratory student, you have an already created namespace named <strong>%USER%-demo-app</strong> that contains an application used for testing the <strong>base-chart</strong>. The application looks like this:</p>
+<p>As a laboratory student, you have an already created namespace named <strong>%USER%-demo-app</strong> that contains an application used for testing the <strong>base-chart</strong>.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/1-overview-demoapp.png" alt="1 overview demoapp">
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-To review your <strong>demo-app</strong> login into OpenShift, go to <strong>topology</strong>, select <strong>%USER%-demo-app</strong> namespace and click the <strong>Open Url</strong> button.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Login into OpenShift and go to <strong>topology</strong>, select <strong>%USER%-demo-app</strong> namespace and click the <strong>Open Url</strong> button.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/1-overview-openurl.png" alt="1 overview openurl">
+</div>
+</div>
+<div class="paragraph">
+<p>You should see this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/1-overview-demoapp.png" alt="1 overview demoapp">
 </div>
 </div>
 </div>
@@ -395,7 +317,10 @@ To review your <strong>demo-app</strong> login into OpenShift, go to <strong>top
 <p>Nexus is an open source repository that supports many artifacts formats like Java, Npm or Helm. In this laboratory we use Nexus to store the <strong>base-chart</strong> Helm Chart packaged version.</p>
 </div>
 <div class="paragraph">
-<p>As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus. Access nexus, sign in with your <strong>student user</strong> and go to <strong>Browse</strong> &gt; <strong>%USER%</strong> to review the repository that we are going to use to store helm packages.</p>
+<p>As part of this laboratory pipeline you will have to upload the chart to your own repository in Nexus.</p>
+</div>
+<div class="paragraph">
+<p>Login into nexus, <strong>sign</strong> in with your <strong>student user</strong> and go to <strong>Browse</strong> &gt; <strong>%USER%</strong> to review the repository that we are going to use to store helm packages.</p>
 </div>
 <div class="imageblock">
 <div class="content">

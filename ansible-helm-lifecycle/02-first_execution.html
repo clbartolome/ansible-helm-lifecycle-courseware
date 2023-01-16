@@ -112,106 +112,22 @@
     <a class="nav-link" href="user-configuration.html">User Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="01-overview.html">1. Overview</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#gitea">Gitea</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#aap">Ansible Automation Platform</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#ocp">OpenShift</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#nexus">Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#argo">Argo CD</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="02-first_execution.html">2. First Execution</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#webhook">Configure Webhook</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#nexus">Configure Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#chart">Update Chart Repository</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#validate">Validate Execution</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#app">Update Application</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="03-testing_environment.html">3. Testing Environment</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#create-ns">Create Namespace</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="04-validations.html">4. Validations</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#route">Route</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#size">Size</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="05-notification.html">5. Notifications</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="05-notification.html#config">User Configuration</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="05-notification.html#task">Task</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="06-challenges.html">6. Challenges</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#validations">Aditional Validations</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#scenarios">Multiple Scenarios</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#sizes">New Sizes</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -261,7 +177,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Visit <a href="user-configuration.html" class="xref page"><strong>User Configuration section</strong></a> to configure your username if you haven&#8217;t set it up yet!
+Visit <strong>User Configuration section</strong> to configure your username if you haven&#8217;t set it up yet!
 </td>
 </tr>
 </table>
@@ -323,6 +239,15 @@ Copy the <strong>Webhook Key</strong> and the <strong>Webhook URL</strong>.
 <li>
 <p>Go to <strong>Settings</strong> (top right corner) &gt; <strong>Webhook</strong> &gt; <strong>Add Webhook</strong> &gt; <strong>Gitea</strong>.</p>
 </li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/2-first-whgit.png" alt="2 first whgit">
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Configure the following fields:</p>
 <div class="ulist">
@@ -533,7 +458,7 @@ version: 1.0
 appVersion: "1.0.0"
 dependencies:
 - name: base-chart
-  repository: <a href="http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/%USER%/" class="bare">http://nexus.apps.cluster-wmbjp.wmbjp.sandbox2100.opentlc.com/repository/%USER%/</a>
+  repository: <a href="http://nexus.app-lifecycle-lab.svc:8081/repository/%USER%/" class="bare">http://nexus.app-lifecycle-lab.svc:8081/repository/%USER%/</a>
   version: 1.0.0</code></pre>
 </div>
 </div>

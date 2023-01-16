@@ -112,106 +112,22 @@
     <a class="nav-link" href="user-configuration.html">User Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="01-overview.html">1. Overview</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#gitea">Gitea</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#aap">Ansible Automation Platform</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#ocp">OpenShift</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#nexus">Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#argo">Argo CD</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="02-first_execution.html">2. First Execution</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#webhook">Configure Webhook</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#nexus">Configure Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#chart">Update Chart Repository</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#validate">Validate Execution</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#app">Update Application</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="03-testing_environment.html">3. Testing Environment</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#create-ns">Create Namespace</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#install-chart">Install Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#uninstall-chart">uninstall Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#delete-ns">Delete Namespace</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="04-validations.html">4. Validations</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#route">Route</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#size">Size</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="05-notification.html">5. Notifications</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="05-notification.html#config">User Configuration</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="05-notification.html#task">Task</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="06-challenges.html">6. Challenges</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#validations">Aditional Validations</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#scenarios">Multiple Scenarios</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#sizes">New Sizes</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -261,7 +177,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Visit <a href="user-configuration.html" class="xref page"><strong>User Configuration section</strong></a> to configure your username if you haven&#8217;t set it up yet!
+Visit <strong>User Configuration section</strong> to configure your username if you haven&#8217;t set it up yet!
 </td>
 </tr>
 </table>
@@ -425,20 +341,30 @@ Use the object <strong>Project</strong> with api_version <strong>project.openshi
 <p>Open the playbook <strong>00-create-namespace.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to create a namespace named <strong>%USER%-base-chart</strong> :</p>
+<p>Modify the playbook adding a new task to create a namespace named <strong>%USER%-base-chart</strong>. The playbook would be like:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Create Base Chart test namespace
-  kubernetes.core.k8s:
-    definition:
-      apiVersion: project.openshift.io/v1
-      kind: Project
-      metadata:
-        name: "%USER%-base-chart"
-    state: present</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Create Base Chart namespace
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Create Base Chart namespace
+
+    - name: Create Base Chart test namespace
+      kubernetes.core.k8s:
+        definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: "%USER%-base-chart"
+        state: present</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -481,10 +407,10 @@ Use the object <strong>Project</strong> with api_version <strong>project.openshi
 <p>Open the playbook <strong>01-install-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to clone <strong>base-chart</strong> repository (you can use /tmp/basechart as destination).</p>
+<p>Add a new task to clone <strong>base-chart</strong> repository (you can use /tmp/basechart as destination).</p>
 </li>
 <li>
-<p>Add a task to install the scenario1. Chart is in <strong>/base-chart/chart</strong> and values are in <strong>/base-chart/test/scenario1/values.yaml</strong>.</p>
+<p>Add a new task to install the scenario1. Chart is in <strong>/base-chart/chart</strong> and values are in <strong>/base-chart/test/scenario1/values.yaml</strong>.</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -538,37 +464,65 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
 <p>Open the playbook <strong>01-install-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to clone <strong>base-chart</strong> repository :</p>
+<p>Add a new task to clone <strong>base-chart</strong> repository. The playbook would be like:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Clone Base Chart remote repository
-  ansible.builtin.git:
-    repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
-    dest: /tmp/base-chart
-    version: master</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Install Helm scenario
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Install Helm scenario
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
+        dest: /tmp/base-chart
+        version: master
+
+    # TODO: Install Helm test scenario1</code></pre>
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Add a task to install the scenario1. Chart is in <strong>/base-chart/chart</strong> and values are in <strong>/base-chart/test/scenario1/values.yaml</strong> :</p>
+<p>Add a new task to install the scenario1. Chart is in <strong>/base-chart/chart</strong> and values are in <strong>/base-chart/test/scenario1/values.yaml</strong>. The playbook would be like:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: "Install Helm test scenario 1"
-  kubernetes.core.helm:
-    name: "scenario1"
-    chart_ref: "/tmp/base-chart/chart"
-    release_namespace: "%USER%-base-chart"
-    wait: yes
-    values_files:
-      - "/tmp/base-chart/test/scenario1/values.yaml"
-  register: install_output</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Install Helm scenario
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Install Helm scenario
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
+        dest: /tmp/base-chart
+        version: master
+
+    - name: "Install Helm test scenario 1"
+      kubernetes.core.helm:
+        name: "scenario1"
+        chart_ref: "/tmp/base-chart/chart"
+        release_namespace: "%USER%-base-chart"
+        wait: yes
+        values_files:
+          - "/tmp/base-chart/test/scenario1/values.yaml"
+      register: install_output</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -611,7 +565,7 @@ Review <strong><a href="https://docs.ansible.com/ansible/latest/collections/kube
 <p>Open the playbook <strong>03-uninstall-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to uninstall the scenario1.</p>
+<p>Add a new task to uninstall the scenario1.</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -653,19 +607,29 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>03-uninstall-test-scenario.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to uninstall the scenario1 :</p>
+<p>Add a new task to uninstall the scenario1. The playbook would be like:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Uninstall  Helm test scenario
-  kubernetes.core.helm:
-    name: "scenario1"
-    chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
-    release_namespace: "%USER%-base-chart"
-    state: absent
-    wait: yes</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Uninstall Helm scenario
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Uninstall Helm scenario
+
+    - name: Uninstall  Helm test scenario
+      kubernetes.core.helm:
+        name: "scenario1"
+        chart_ref: "/tmp/base-chart/test/scenario1/values.yaml"
+        release_namespace: "%USER%-base-chart"
+        state: absent
+        wait: yes</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -708,7 +672,7 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>04-delete-namespace.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to delete the namespace named <strong>%USER%-base-chart</strong> .</p>
+<p>Add a new task to delete the namespace named <strong>%USER%-base-chart</strong> .</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -738,20 +702,30 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>04-delete-namespace.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to delete the namespace named <strong>%USER%-base-chart</strong> :</p>
+<p>Add a new task to delete the namespace named <strong>%USER%-base-chart</strong>. The playbook would be like:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Delete Base Chart test namespace
-  kubernetes.core.k8s:
-    definition:
-      apiVersion: project.openshift.io/v1
-      kind: Project
-      metadata:
-        name: "%USER%-base-chart"
-    state: absent</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Delete Base Chart namespace
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Delete Base Chart namespace
+
+    - name: Delete Base Chart test namespace
+      kubernetes.core.k8s:
+        definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: "%USER%-base-chart"
+        state: absent</code></pre>
 </div>
 </div>
 <div class="ulist">

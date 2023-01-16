@@ -112,106 +112,22 @@
     <a class="nav-link" href="user-configuration.html">User Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="01-overview.html">1. Overview</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#gitea">Gitea</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#aap">Ansible Automation Platform</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#ocp">OpenShift</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#nexus">Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-overview.html#argo">Argo CD</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="02-first_execution.html">2. First Execution</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#webhook">Configure Webhook</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#nexus">Configure Nexus</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#chart">Update Chart Repository</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#validate">Validate Execution</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-first_execution.html#app">Update Application</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="03-testing_environment.html">3. Testing Environment</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#create-ns">Create Namespace</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#install-chart">Install Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#uninstall-chart">uninstall Chart</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-testing_environment.html#delete-ns">Delete Namespace</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="04-validations.html">4. Validations</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#replicas">Replicas</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#route">Route</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="04-validations.html#size">Size</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="05-notification.html">5. Notifications</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#config">User Configuration</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#task">Task</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="06-challenges.html">6. Challenges</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#validations">Aditional Validations</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#scenarios">Multiple Scenarios</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="06-challenges.html#sizes">New Sizes</a>
-  </li>
-</ul>
   </li>
 </ul>
   </li>
@@ -267,7 +183,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Visit <a href="user-configuration.html" class="xref page"><strong>User Configuration section</strong></a> to configure your username if you haven&#8217;t set it up yet!
+Visit <strong>User Configuration section</strong> to configure your username if you haven&#8217;t set it up yet!
 </td>
 </tr>
 </table>
@@ -279,7 +195,7 @@ Visit <a href="user-configuration.html" class="xref page"><strong>User Configura
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Take a look at <a href="03-testing_environment.html#run-manually" class="xref page"><strong>Run Workflow Manually</strong></a> section to review how to test the Workflow manually.
+Take a look at <strong>3. Testing Environment</strong> &gt; <strong>Run Workflow Manually</strong> to review how to test the Workflow manually.
 </td>
 </tr>
 </table>
@@ -328,7 +244,7 @@ Take a look at <a href="03-testing_environment.html#run-manually" class="xref pa
 <p>Open the playbook <strong>05-helm-package-nexus.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to store the chart version as a variable named <strong>new_version</strong>.</p>
+<p>Add a new task to store the chart version as a variable named <strong>new_version</strong>.</p>
 </li>
 <li>
 <p>Commit your changes.</p>
@@ -370,7 +286,7 @@ To get the chart version take a look at a task named <strong>Load Chart informat
 <p>Open the playbook <strong>05-helm-package-nexus.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to store the chart version as a variable named <strong>new_version</strong>:</p>
+<p>Add a new task to store the chart version as a variable named <strong>new_version</strong>:</p>
 </li>
 </ul>
 </div>
@@ -380,6 +296,56 @@ To get the chart version take a look at a task named <strong>Load Chart informat
   ansible.builtin.set_stats:
     data:
       new_version: "{{ version }}"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The playbook should look like this:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Helm Package Nexus
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Helm Package
+
+    - name: Clone Base Chart remote repository
+      ansible.builtin.git:
+        repo: <a href="http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git" class="bare">http://gitea.app-lifecycle-lab.svc:3000/%USER%/base-chart.git</a>
+        dest: /tmp/base-chart
+        version: master
+
+    - name: Package Helm test scenario
+      ansible.builtin.shell: helm package chart
+      args:
+        chdir: /tmp/base-chart
+
+    - name: Load Chart information
+      ansible.builtin.include_vars:
+        file: /tmp/base-chart/chart/Chart.yaml
+
+    - name: Nexus Credentials
+      ansible.builtin.set_fact:
+        nexus_credentials: "%USER%:%USER%"
+
+    - name: Upload Helm Base Chart package to Nexus
+      ansible.builtin.shell: |
+        curl -X 'POST' \
+        'http://{{ nexus_credentials }}@nexus.app-lifecycle-lab.svc:8081/service/rest/v1/components?repository=%USER%' \
+        -H 'accept: application/json' \
+        -H 'Content-Type: multipart/form-data' \
+        -F 'helm.asset=@base-chart-{{ version }}.tgz;type=application/gzip'
+      args:
+        chdir: /tmp/base-chart
+
+    - name: "Populate New Base Chart version {{ version }}"
+      ansible.builtin.set_stats:
+        data:
+          new_version: "{{ version }}"</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -417,14 +383,14 @@ To get the chart version take a look at a task named <strong>Load Chart informat
 <p>Open the playbook <strong>06-notify-new-release.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to send a notification to <strong>Slack</strong> with:</p>
+<p>Add a new task to send a notification to <strong>Slack</strong> with:</p>
 <div class="ulist">
 <ul>
 <li>
 <p>token: "{{ lookup('env','SLACK_TOKEN') }}".</p>
 </li>
 <li>
-<p>msg:  the value of the variable <strong>new_version</strong>.</p>
+<p>msg:  the value of the variable <strong>new_version</strong> and your <strong>username</strong>.</p>
 </li>
 <li>
 <p>channel: "{{ lookup('env','SLACK_CHANNEL') }}".</p>
@@ -463,26 +429,37 @@ Use the collection <strong><a href="https://docs.ansible.com/ansible/latest/coll
 <p>Open the playbook <strong>06-notify-new-release.yml</strong> and edit it.</p>
 </li>
 <li>
-<p>Add a task to send a notification to <strong>Slack</strong>:</p>
+<p>Add a new task to send a notification to <strong>Slack</strong>:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">- name: Send New Base Chart version Slack notification
-  community.general.slack:
-    token: "{{ lookup('env','SLACK_TOKEN') }}"
-    msg: |
-        ### Base Chart Pipeline ###
-        --------------------------------------
-        `Status`: Success.
-        `New Base Chart Version`: {{ new_version }}
-        --------------------------------------
-    channel: "{{ lookup('env','SLACK_CHANNEL') }}"
-    color: good
-    username: "%USER%"
-    link_names: 0
-    parse: 'none'</code></pre>
+<pre class="highlightjs highlight"><code class="language-yml hljs" data-lang="yml">---
+- name: Notify New Base Chart version
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Notify New Base Chart version
+
+    - name: Send New Base Chart version Slack notification
+      community.general.slack:
+        token: "{{ lookup('env','SLACK_TOKEN') }}"
+        msg: |
+            ### Base Chart Pipeline ###
+            --------------------------------------
+            `Status`: Success.
+            `New Base Chart Version`: {{ new_version }}
+            `Sent by`: %USER%
+            --------------------------------------
+        channel: "{{ lookup('env','SLACK_CHANNEL') }}"
+        color: good
+        username: "Ansible on {{ inventory_hostname }}"
+        link_names: 0
+        parse: 'none'</code></pre>
 </div>
 </div>
 <div class="ulist">
