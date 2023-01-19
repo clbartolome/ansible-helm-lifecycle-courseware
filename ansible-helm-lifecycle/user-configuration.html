@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>User Configuration :: Ansible Helm Lifecycle Guide</title>
+    <title>Lab Configuration :: Ansible Helm Lifecycle Guide</title>
     <link rel="canonical" href="https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/user-configuration.html">
     <link rel="prev" href="index.html">
     <link rel="next" href="01-overview.html">
@@ -19,7 +19,17 @@
       const urlParams = new URLSearchParams(window.location.search);
       const user = urlParams.get('USER');
 
-      if (user) {
+      const server = urlParams.get('SERVER');
+      
+      document.getElementById('etherpad_url').href = "http://etherpad." + server + "/p/ansible-helm-lifecycle-lab";
+      document.getElementById('ocp_url').href = "https://console-openshift-console." + server;
+      document.getElementById('aap_url').href = "https://aap-lab." + server;
+      document.getElementById('gitea_url').href = "http://gitea." + server;
+      document.getElementById('nexus_url').href = "http://nexus." + server;
+      document.getElementById('argo_url').href = "http://argocd-server-app-lifecycle-lab." + server;
+    
+
+    if (user) {
         showUser( user );
       } else {
         showUserForm();
@@ -42,7 +52,9 @@
     function goWithUser() {
       elUserInput = document.getElementById('projectfield');
       elClusterInput = document.getElementById('clusterfield2');
-      window.location.search = ('USER=' + elUserInput.value);
+      urlParams = new URLSearchParams(window.location.search);
+      server = urlParams.get('SERVER');
+      window.location.search = ( 'SERVER=' + server + '&USER=' + elUserInput.value);
     }
 
   </script>
@@ -78,21 +90,14 @@
 
         <div class="navbar-item" id="navbar-form-project-filled" >
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
-        </div>       
-        
-        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
-        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
-        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">More Tutorials</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
-            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
-            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
-            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
-            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
-          </div>
-      </div>
+        </div> 
+      
+        <a class="navbar-item" id="etherpad_url" href="" target="_blank">Etherpad</a>
+        <a class="navbar-item" id="ocp_url" href="" target="_blank">OpenShift</a>
+        <a class="navbar-item" id="aap_url" href="" target="_blank">Ansible Automation Platform</a>
+        <a class="navbar-item" id="gitea_url" href="" target="_blank">Gitea</a>
+        <a class="navbar-item" id="nexus_url" href="" target="_blank">Nexus</a>
+        <a class="navbar-item" id="argo_url" href="" target="_blank">ArgoCD</a>
     </div>
   </nav>
 </header><div class="body">
@@ -109,7 +114,7 @@
     <a class="nav-link" href="index.html">Welcome</a>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="user-configuration.html">User Configuration</a>
+    <a class="nav-link" href="user-configuration.html">Lab Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="01-overview.html">1. Overview</a>
@@ -160,14 +165,30 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Ansible Helm Lifecycle Guide</a></li>
-    <li><a href="user-configuration.html">User Configuration</a></li>
+    <li><a href="user-configuration.html">Lab Configuration</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/clbartolome/ansible-helm-lifecycle-guide/edit/master/documentation/modules/ROOT/pages/user-configuration.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">User Configuration</h1>
+<h1 class="page">Lab Configuration</h1>
+<div class="paragraph">
+<p>All the applications and services that you are going to use during this laboratory has been already deployed and configured. In the top of this page you will find buttons to access all applications:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/user_buttons.png" alt="user buttons">
+</div>
+</div>
+<div class="paragraph">
+<p>The only task that you have to do before start working is to get and configure your user. In order to do that open Etherpad application and write your name next to a <strong>student id</strong> to reserve it:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/user_etherpad.png" alt="user etherpad">
+</div>
+</div>
 <div class="paragraph">
 <p>During this laboratory exercises you will see % USER % in some files and URLs and you will have to replace it with your <strong>asigned student</strong>.</p>
 </div>

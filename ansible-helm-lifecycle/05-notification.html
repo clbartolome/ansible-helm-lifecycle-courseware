@@ -19,7 +19,17 @@
       const urlParams = new URLSearchParams(window.location.search);
       const user = urlParams.get('USER');
 
-      if (user) {
+      const server = urlParams.get('SERVER');
+      
+      document.getElementById('etherpad_url').href = "http://etherpad." + server + "/p/ansible-helm-lifecycle-lab";
+      document.getElementById('ocp_url').href = "https://console-openshift-console." + server;
+      document.getElementById('aap_url').href = "https://aap-lab." + server;
+      document.getElementById('gitea_url').href = "http://gitea." + server;
+      document.getElementById('nexus_url').href = "http://nexus." + server;
+      document.getElementById('argo_url').href = "http://argocd-server-app-lifecycle-lab." + server;
+    
+
+    if (user) {
         showUser( user );
       } else {
         showUserForm();
@@ -42,7 +52,9 @@
     function goWithUser() {
       elUserInput = document.getElementById('projectfield');
       elClusterInput = document.getElementById('clusterfield2');
-      window.location.search = ('USER=' + elUserInput.value);
+      urlParams = new URLSearchParams(window.location.search);
+      server = urlParams.get('SERVER');
+      window.location.search = ( 'SERVER=' + server + '&USER=' + elUserInput.value);
     }
 
   </script>
@@ -78,21 +90,14 @@
 
         <div class="navbar-item" id="navbar-form-project-filled" >
           <span class="navbar-text" style="margin-left: 1rem; margin-right: 1rem;">|</span>
-        </div>       
-        
-        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
-        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
-        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">More Tutorials</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
-            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
-            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
-            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
-            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
-          </div>
-      </div>
+        </div> 
+      
+        <a class="navbar-item" id="etherpad_url" href="" target="_blank">Etherpad</a>
+        <a class="navbar-item" id="ocp_url" href="" target="_blank">OpenShift</a>
+        <a class="navbar-item" id="aap_url" href="" target="_blank">Ansible Automation Platform</a>
+        <a class="navbar-item" id="gitea_url" href="" target="_blank">Gitea</a>
+        <a class="navbar-item" id="nexus_url" href="" target="_blank">Nexus</a>
+        <a class="navbar-item" id="argo_url" href="" target="_blank">ArgoCD</a>
     </div>
   </nav>
 </header><div class="body">
@@ -109,7 +114,7 @@
     <a class="nav-link" href="index.html">Welcome</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="user-configuration.html">User Configuration</a>
+    <a class="nav-link" href="user-configuration.html">Lab Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="01-overview.html">1. Overview</a>
@@ -206,7 +211,37 @@ Take a look at <strong>3. Testing Environment</strong> &gt; <strong>Run Workflow
 <h2 id="config"><a class="anchor" href="#config"></a>User Configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: Content</p>
+<p>As part of this laboratory setup there should be a credential already configured in <strong>AAP</strong> &gt; <strong>Resources</strong> &gt; <strong>Credentials</strong> &gt; <strong>Slack Token</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/5-not-creds.png" alt="5 not creds">
+</div>
+</div>
+<div class="paragraph">
+<p>This credential is exposing the following environment variables in the job template <strong>[JT] Notify New Release</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Slack token: SLACK_TOKEN</p>
+</li>
+<li>
+<p>Slack channel: SLACK_CHANNEL</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+All user will be using the same Slack channel (<strong>#rhte-lab</strong>) and token so please do not modify these values.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
