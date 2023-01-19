@@ -11,7 +11,17 @@ TIP: Take a look at *3. Testing Environment* > *Run Workflow Manually* to review
 [#config]
 == User Configuration
 
-TODO: Content
+As part of this laboratory setup there should be a credential already configured in *AAP* > *Resources* > *Credentials* > *Slack Token*.
+
+image::5-not-creds.png[]
+
+This credential is exposing the following environment variables in the job template *[JT] Notify New Release*:
+
+* Slack token: SLACK_TOKEN
+* Slack channel: SLACK_CHANNEL
+
+IMPORTANT: All user will be using the same Slack channel (*#rhte-lab*) and token so please do not modify these values.
+
 
 [#task]
 == Send Notification
