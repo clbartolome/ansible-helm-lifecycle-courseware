@@ -2,6 +2,6 @@ name: ansible-helm-lifecycle
 title: Ansible Helm Lifecycle Guide
 version: master
 nav:
-  - modules/ROOT/nav.adoc
+
 
 start_page: ROOT:index.adoc
