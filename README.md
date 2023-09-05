@@ -1,6 +1,6 @@
 # Ansible Helm Lifecycle Lab
 
-Created from Red Hat Scholars [template](https://github.com/clbartolome/guide-template).
+Created from Red Hat Scholars [template](https://github.com/redhat-scholars/courseware-template).
 
 Guide [link](https://clbartolome.github.io/ansible-helm-lifecycle-guide/ansible-helm-lifecycle/index.html)
 
