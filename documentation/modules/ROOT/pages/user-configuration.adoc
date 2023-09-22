@@ -10,7 +10,7 @@ The only task that you have to do before start working is to get and configure y
 
 image::user_etherpad.png[]
 
-During this laboratory exercises you will see % USER % in some files and URLs and you will have to replace it with your *asigned student*. 
+During this laboratory exercises you will see % USER % in some files and URLs and you will have to replace it with your *assigned student*. 
 
 You must introduce your *student* and press *enter* on the input field on this web site navigation top bar:
 
