@@ -19,11 +19,11 @@
       const server = urlParams.get('SERVER');
       
       document.getElementById('etherpad_url').href = "http://etherpad." + server + "/p/ansible-helm-lifecycle-lab";
-      document.getElementById('ocp_url').href = "https://openshift-gitops-server-openshift-gitops." + server;
+      document.getElementById('ocp_url').href = "https://console-openshift-console." + server;
       document.getElementById('aap_url').href = "https://aap-lab." + server;
       document.getElementById('gitea_url').href = "http://gitea." + server;
       document.getElementById('nexus_url').href = "http://nexus." + server;
-      document.getElementById('argo_url').href = "http://argocd-server-app-lifecycle-lab." + server;
+      document.getElementById('argo_url').href = "https://openshift-gitops-server-openshift-gitops." + server;
     
 
     if (user) {
